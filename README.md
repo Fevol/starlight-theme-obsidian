@@ -1,0 +1,1 @@
+packages/starlight-theme-obsidian/README.md

@@ -1,0 +1,45 @@
+---
+title: Getting Started
+description: Learn how to use the Starlight Obsidian theme in your Starlight site.
+---
+
+A [Starlight](https://starlight.astro.build) theme inspired by the style of [Obsidian Publish](https://obsidian.md/publish) websites.
+This project is in no way affiliated with [Obsidian](https://obsidian.md/).
+
+Various [examples](/examples/asides/) are provided to showcase changes made by the theme.
+
+## Prerequisites
+
+You will need to have a Starlight website set up.
+If you don't have one yet, you can follow the ["Getting Started"](https://starlight.astro.build/getting-started) guide in the Starlight docs to create one.
+
+## Installation
+
+import { Steps } from '@astrojs/starlight/components'
+import { PackageManagers } from 'starlight-package-managers'
+
+<Steps>
+    1. The Starlight Obsidian theme is a Starlight [plugin](https://starlight.astro.build/reference/plugins/) that you can install using your favorite package manager:
+        <PackageManagers pkg="starlight-theme-obsidian" />
+    2. Configure the plugin in your Starlight [configuration](https://starlight.astro.build/reference/configuration/#plugins) in the `astro.config.mjs` file.
+        ```diff lang="js"
+            // astro.config.mjs
+            import starlight from '@astrojs/starlight'
+            import { defineConfig } from 'astro/config'
+        +   import starlightThemeObsidian from 'starlight-theme-obsidian'
+
+            export default defineConfig({
+                integrations: [
+                    starlight({
+        +               plugins: [starlightThemeObsidian()],
+                        title: 'My Docs',
+                    }),
+                ],
+            })
+        ```
+    3. [Start the development server](https://starlight.astro.build/getting-started/#start-the-development-server) to preview the theme in action.
+</Steps>
+
+That's it! You should now see the Starlight Obsidian theme applied to your Starlight website.
+
+You can now further configure the theme and the graph component in the sidebar by following the [configuration](/configuration/graph/) guide.

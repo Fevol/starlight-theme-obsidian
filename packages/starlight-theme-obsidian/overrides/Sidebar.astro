@@ -1,0 +1,33 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Sidebar.astro';
+import Search from '@astrojs/starlight/components/Search.astro';
+
+import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
+import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
+import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
+import ThemeSelect from './ThemeSelect.astro';
+
+
+import config from 'virtual:starlight/user-config';
+
+const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+---
+
+<div class="sidebar-top">
+    <div class="title-wrapper ">
+        <SiteTitle {...Astro.props} />
+    </div>
+</div>
+
+{shouldRenderSearch && <Search {...Astro.props} />}
+
+<div class="action-group">
+    <div class="social-icons">
+        <SocialIcons {...Astro.props} />
+    </div>
+    <ThemeSelect {...Astro.props} />
+    <LanguageSelect {...Astro.props} />
+</div>
+
+<Default {...Astro.props}><slot /></Default>

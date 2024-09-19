@@ -1,0 +1,43 @@
+{
+  "name": "starlight-theme-obsidian",
+  "author": "Fevol",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "A Starlight theme inspired by the Obsidian Publish website theme",
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./overrides/Sidebar.astro": "./overrides/Sidebar.astro",
+    "./overrides/PageFrame.astro": "./overrides/PageFrame.astro",
+    "./overrides/PageSidebar.astro": "./overrides/PageSidebar.astro",
+    "./overrides/Pagination.astro": "./overrides/Pagination.astro",
+    "./overrides/ThemeSelect.astro": "./overrides/ThemeSelect.astro",
+    "./overrides/MobileMenuFooter.astro": "./overrides/MobileMenuFooter.astro",
+    "./schema": "./schema.ts",
+    "./styles/common.css": "./styles/common.css"
+  },
+  "scripts": {},
+  "peerDependencies": {
+    "@astrojs/starlight": "^0.28.2",
+    "astro": ">=4.15.8",
+    "starlight-site-graph": "^0.1.1"
+  },
+  "keywords": [
+    "starlight",
+    "theme",
+    "graph",
+    "astro",
+    "astro-component",
+    "withastro",
+    "obsidian"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Fevol/starlight-theme-obsidian.git",
+    "directory": "packages/starlight-theme-obsidian"
+  },
+  "bugs": "https://github.com/Fevol/starlight-theme-obsidian/issues",
+  "dependencies": {
+    "@astrojs/starlight": "^0.28.2"
+  }
+}

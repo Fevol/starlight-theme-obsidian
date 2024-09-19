@@ -1,0 +1,59 @@
+---
+title: Graph Configuration
+---
+
+## General configuration
+
+To configure the graph component in the sidebar, refer to the [Starlight Site Graph reference](https://github.com/fevol/starlight-site-graph) for more information.
+
+:::danger[Warning]
+Site Graph plugin reference website is not available at the moment.
+:::
+
+
+## Examples
+### Disable the graph on every page
+
+[//]: # (TODO: replace visibilityRules)
+```diff lang="js"
+    // astro.config.mjs
+    import starlight from '@astrojs/starlight'
+    import { defineConfig } from 'astro/config'
+    import starlightThemeObsidian from 'starlight-theme-obsidian'
+
+    export default defineConfig({
+        integrations: [
+            starlight({
+                plugins: [starlightThemeObsidian({
++                  graphConfig: {
++                       visibilityRules: []
++                  }
+                })],
+                title: 'My Docs',
+            }),
+        ],
+    })
+```
+
+
+### Remove quick actions from the graph
+
+```diff lang="js"
+    // astro.config.mjs
+    import starlight from '@astrojs/starlight'
+    import { defineConfig } from 'astro/config'
+    import starlightThemeObsidian from 'starlight-theme-obsidian'
+
+    export default defineConfig({
+        integrations: [
+            starlight({
+                plugins: [starlightThemeObsidian({
++                  graphConfig: {
++                       actions: []
++                  }
+                })],
+                title: 'My Docs',
+            }),
+        ],
+    })
+```

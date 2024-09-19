@@ -1,0 +1,21 @@
+---
+title: Theme Configuration
+---
+
+## General configuration
+
+All of Starlight's [CSS variables](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css) are available for
+configuration, with only minimal changes to the color palette.
+
+The only _major_ change is that the background color of the site is set to `#111213` and `#f8f9fa` for dark and light themes, respectively.
+Additionally, the sidebar and navigation background color variables have been styled to match the page background.
+
+
+## Setting reading width
+
+The reading width can be easily adapted by setting the `--sl-content-width` variable.
+
+:::note[Note]
+When either of the sidebars is hidden (which happens on smaller screens), the content width will _always_ automatically expand to fill the available space,
+even if it exceeds the set `--sl-content-width`.
+:::

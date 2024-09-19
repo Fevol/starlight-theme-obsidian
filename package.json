@@ -1,0 +1,41 @@
+{
+	"name": "starlight-theme-obsidian",
+	"version": "0.1.1",
+	"license": "MIT",
+	"description": "A Starlight theme inspired by the Obsidian Publish website theme",
+	"author": "Fevol",
+	"type": "module",
+	"engines": {
+		"node": ">=18"
+	},
+	"private": true,
+	"sideEffects": false,
+	"keywords": [
+		"starlight",
+		"plugin",
+		"theme",
+		"obsidian",
+		"graph",
+		"astro",
+		"withastro"
+	],
+	"homepage": "https://github.com/fevol/starlight-theme-obsidian",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/fevol/starlight-theme-obsidian.git"
+	},
+	"bugs": "https://github.com/fevol/starlight-theme-obsidian/issues",
+	"devDependencies": {
+		"prettier": "^3.3.3"
+	},
+	"scripts": {
+		"format": "prettier --write .",
+		"release-beta": "bun run scripts/bump-version.ts beta",
+		"release-patch": "bun run scripts/bump-version.ts patch",
+		"release-minor": "bun run scripts/bump-version.ts minor",
+		"release-major": "bun run scripts/bump-version.ts major"
+	},
+	"dependencies": {
+		"@types/node": "^22.4.0"
+	}
+}
