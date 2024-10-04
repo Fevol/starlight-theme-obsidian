@@ -13,10 +13,6 @@ jobs:
       pages: write
       id-token: write
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
@@ -26,11 +22,10 @@ jobs:
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      - uses: withastro/action@v3
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-        
+      - name: Install, build, and upload your site
+        uses: withastro/action@v3
+        with:
+          path: ./docs
 #      - name: Create NPM Release
 #        if: ${{ !contains(github.ref_name, 'beta') }}
 #        run: |
@@ -61,14 +56,13 @@ jobs:
 #            dist/starlight-theme-obsidian-${{ github.ref_name }}.zip
 #          token: ${{ secrets.GITHUB_TOKEN }}
 #          prerelease: ${{ contains(github.ref_name, 'beta') }}
-  # deploy:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
-  #   steps:
-  #     - uses: withastro/action@v3
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v4
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
