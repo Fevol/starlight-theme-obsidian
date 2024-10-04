@@ -1,5 +1,5 @@
 ---
-import TableOfContents from '@astrojs/starlight/components/TableOfContents.astro';
+import TableOfContents from 'virtual:starlight/components/TableOfContents';
 
 import type { Props } from '@astrojs/starlight/props';
 
@@ -7,6 +7,7 @@ import { PageGraph, Backlinks } from "starlight-site-graph/components";
 
 ---
 
+<!-- (STARLIGHT-THEME-OBSIDIAN): Add page graph and backlink components -->
 <PageGraph {...Astro.props} class="right-sidebar-panel graph-panel">
     <h2 slot="title">Graph View</h2>
 </PageGraph>
