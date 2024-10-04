@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import starlightObsidianTheme from 'starlight-theme-obsidian';
+import starlightLinksValidator from 'starlight-links-validator';
 
 export default defineConfig({
     site: "https://fevol.github.io",
@@ -20,9 +21,12 @@ export default defineConfig({
                 './src/styles/global.css'
             ],
             plugins: [
+                starlightLinksValidator({
+                    errorOnInvalidHashes: false
+                }),
                 starlightObsidianTheme(),
             ],
-            favicon: './public/favicon.svg',
+            favicon: './favicon.svg',
             sidebar: [
                 {
                     label: 'Start Here',
