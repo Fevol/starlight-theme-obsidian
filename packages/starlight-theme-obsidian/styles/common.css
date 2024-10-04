@@ -188,6 +188,8 @@ mobile-starlight-toc {
 .page {
     flex-direction: row;
     justify-content: center;
+
+    scrollbar-gutter: stable;
 }
 
 /* Make sidebar positioned within content (instead of absolute) */
@@ -530,3 +532,14 @@ starlight-file-tree {
     border-inline-start-color: var(--sl-color-gray-2);
 }
 /* --------------------------------------------------- */
+
+
+
+/* Ensure that graph inside sidebar matches width of container */
+@media (min-width: 72em) {
+    .right-sidebar .graph-component {
+        width: unset;
+        max-width: var(--slsg-graph-width);
+    }
+}
+/* ----------------------------------------------------------- */
