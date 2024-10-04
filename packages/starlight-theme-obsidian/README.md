@@ -20,7 +20,7 @@
 
 ## Getting Started
 
-Want to get started immediately? Check out the [getting started guide](https://starlight-theme-rapide.vercel.app/getting-started/) or check out the various [examples](https://starlight-theme-rapide.vercel.app/examples/asides/) to see the theme in action.
+Want to get started immediately? Check out the [getting started guide](https://fevol.github.io/starlight-theme-obsidian/getting-started/) or check out the various [examples](https://fevol.github.io/starlight-theme-obsidian/examples/asides/) to see the theme in action.
 
 ## License
 
@@ -31,7 +31,9 @@ See [LICENSE](https://github.com/Fevol/starlight-theme-obsidian/blob/main/LICENS
 
 ## Attribution
 
-This theme is heavily based on the [Starlight Rapide Theme](https://github.com/HiDeoo/starlight-theme-rapide) by HiDeoo.
+This theme is heavily based on the [Starlight Rapide Theme](https://github.com/HiDeoo/starlight-theme-rapide) by HiDeoo, licensed under MIT.
 All credits for page examples, project structure and certain styles go to them. 
 
 Where applicable, attribution has been added to each relevant piece of code (or codefile).
+
+The moon icon used for the site favicon is adapted from [SVG Repo](https://www.svgrepo.com/svg/120949/moon), which has a CC0 license.
