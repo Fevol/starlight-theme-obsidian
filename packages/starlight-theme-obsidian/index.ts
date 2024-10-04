@@ -22,7 +22,7 @@ export default function plugin(userConfig?: StarlightSiteGraphConfig): Starlight
 
                 const componentOverrides: typeof config.components = {};
 
-                const overridableComponents = ['Sidebar', 'PageFrame', 'Pagination', 'ThemeSelect', 'MobileMenuFooter', 'PageSidebar'];
+                const overridableComponents = ['Sidebar', 'PageFrame', 'Pagination', 'ThemeSelect', 'PageSidebar'];
                 for (const component of overridableComponents) {
                     if (config.components?.[component]) {
                         logger.warn(

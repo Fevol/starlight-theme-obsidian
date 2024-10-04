@@ -253,12 +253,6 @@ footer {
 
 /* ------------- Site sidebar styling ---------------- */
 /* Align site actions and links in row */
-.action-group {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
 .social-icons {
     display: flex;
     gap: 1rem;
@@ -267,6 +261,30 @@ footer {
 
 .social-icons::after {
     border-inline-end: unset;
+}
+
+.sidebar-content {
+    .sidebar-top {
+        order: 0;
+    }
+
+    site-search button {
+        order: 1;
+    }
+
+    div.md\:sl-hidden {
+        display: initial;
+        order: 2;
+
+        .mobile-preferences {
+            border-top: unset;
+            padding: 0;
+        }
+    }
+
+    sl-sidebar-state-persist ul {
+        order: 3;
+    }
 }
 
 /* --------------------------------------------------- */

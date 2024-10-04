@@ -23,12 +23,4 @@ const shouldRenderSearch = config.pagefind || config.components.Search !== '@ast
 
 {shouldRenderSearch && <Search {...Astro.props} />}
 
-<div class="action-group">
-    <div class="social-icons">
-        <SocialIcons {...Astro.props} />
-    </div>
-    <ThemeSelect {...Astro.props} />
-    <LanguageSelect {...Astro.props} />
-</div>
-
 <Default {...Astro.props}><slot /></Default>
