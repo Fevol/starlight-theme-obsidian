@@ -1,21 +1,29 @@
 ---
+// FIXME: Icon import usage causes an `CustomElementRegistry` redefinition error, even if the Pagination is the only override component for the plugin. Currently bodged but suboptimal solution.
+//          Redefinition is on a completely different element: `Tabs`.
 import { Icon } from '@astrojs/starlight/components'
 import type { Props } from '@astrojs/starlight/props'
 
 const { dir, pagination } = Astro.props
 const { prev, next } = pagination
 const isRtl = dir === 'rtl'
+
+const arrowLeft = `<svg aria-hidden="true" class="astro-rwumc3rb astro-ravaf6ci" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"></path></svg>`;
+const arrowRight = `<svg aria-hidden="true" class="astro-rwumc3rb astro-ravaf6ci" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="M17.92 11.62a1.001 1.001 0 0 0-.21-.33l-5-5a1.003 1.003 0 1 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1.002 1.002 0 0 0 .325 1.639 1 1 0 0 0 1.095-.219l5-5a1 1 0 0 0 .21-.33 1 1 0 0 0 0-.76Z"></path></svg>`
+
 ---
 
 <!-- CREDITS FOR CODE GO TO: @Hideoo (original code: https://github.com/HiDeoo/starlight-theme-rapide/blob/main/packages/starlight-theme-rapide/overrides/Pagination.astro) -->
 <!-- (STARLIGHT-THEME-OBSIDIAN): Redefine the style of the pagination elements -->
+
 {
   (prev || next) && (
     <div class="pagination-links" dir={dir}>
       {prev && (
         <a href={prev.href} rel="prev">
           <div>
-            <Icon name={isRtl ? 'right-arrow' : 'left-arrow'} size="1.25rem" />
+            <!--<Icon name={isRtl ? 'right-arrow' : 'left-arrow'} size="1.25rem" />-->
+            {isRtl ? <Fragment set:html={arrowRight} /> : <Fragment set:html={arrowLeft} />}
             {Astro.locals.t('page.previousLink')}
           </div>
           <p class="link-title">{prev.label}</p>
@@ -25,7 +33,8 @@ const isRtl = dir === 'rtl'
         <a href={next.href} rel="next">
           <div>
             {Astro.locals.t('page.nextLink')}
-            <Icon name={isRtl ? 'left-arrow' : 'right-arrow'} size="1.25rem" />
+            <!--<Icon name={isRtl ? 'left-arrow' : 'right-arrow'} size="1.25rem" />-->
+            {isRtl ? <Fragment set:html={arrowLeft} /> : <Fragment set:html={arrowRight} />}
           </div>
           <p class="link-title">{next.label}</p>
         </a>
