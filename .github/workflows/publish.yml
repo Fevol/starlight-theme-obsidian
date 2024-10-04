@@ -62,7 +62,7 @@ jobs:
     steps:
       - uses: withastro/action@v3
         with:
-          path: ./docs/
+          path: docs/
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
