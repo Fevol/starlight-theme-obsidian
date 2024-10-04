@@ -22,6 +22,10 @@ jobs:
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
+      - name: Install packages inside starlight-theme-obsidian dependency
+        run: |
+          cd packages/starlight-theme-obsidian
+          bun install
       - name: Install, build, and upload your site
         uses: withastro/action@v3
         with:
