@@ -28,8 +28,8 @@ jobs:
           bun install
       - name: Install, build, and upload your site
         uses: withastro/action@v3
-        with:
-          path: ./docs
+#        with:
+#          path: ./docs
 #      - name: Create NPM Release
 #        if: ${{ !contains(github.ref_name, 'beta') }}
 #        run: |
