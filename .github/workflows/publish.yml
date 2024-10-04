@@ -60,7 +60,8 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - run: pwd
+      - run: ls
+      - run: cd ../docs
       - uses: withastro/action@v3
       - name: Deploy to GitHub Pages
         id: deployment
