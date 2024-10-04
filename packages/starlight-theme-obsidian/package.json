@@ -19,8 +19,8 @@
 	"scripts": {},
 	"peerDependencies": {
 		"@astrojs/starlight": "^0.28.2",
-		"astro": ">=4.15.8",
-		"starlight-site-graph": "^0.1.1"
+		"astro": "^4.15.11",
+		"starlight-site-graph": "^0.1.2"
 	},
 	"keywords": [
 		"starlight",
