@@ -1,11 +1,11 @@
 ---
 import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Sidebar.astro';
-import Search from '@astrojs/starlight/components/Search.astro';
+import Search from 'virtual:starlight/components/Search';
 
-import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
-import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
-import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import SiteTitle from 'virtual:starlight/components/SiteTitle';
+import SocialIcons from 'virtual:starlight/components/SocialIcons';
 import ThemeSelect from './ThemeSelect.astro';
 
 
@@ -14,6 +14,7 @@ import config from 'virtual:starlight/user-config';
 const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
+<!-- (STARLIGHT-THEME-OBSIDIAN): Reorder site sidebar to always contain  -->
 <div class="sidebar-top">
     <div class="title-wrapper ">
         <SiteTitle {...Astro.props} />
