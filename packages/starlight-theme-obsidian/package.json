@@ -17,11 +17,6 @@
 		"./styles/common.css": "./styles/common.css"
 	},
 	"scripts": {},
-	"peerDependencies": {
-		"@astrojs/starlight": "^0.28.2",
-		"astro": "^4.15.11",
-		"starlight-site-graph": "^0.1.5"
-	},
 	"keywords": [
 		"starlight",
 		"theme",
@@ -37,7 +32,9 @@
 		"directory": "packages/starlight-theme-obsidian"
 	},
 	"bugs": "https://github.com/Fevol/starlight-theme-obsidian/issues",
-	"dependencies": {
-		"@astrojs/starlight": "^0.28.2"
+	"peerDependencies": {
+		"@astrojs/starlight": "^0.28.2",
+		"astro": "^4.15.11",
+		"starlight-site-graph": "^0.1.5"
 	}
 }
