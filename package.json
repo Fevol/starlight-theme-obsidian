@@ -10,6 +10,10 @@
 	},
 	"private": true,
 	"sideEffects": false,
+	"workspaces": [
+		"packages/*",
+		"docs/"
+	],
 	"keywords": [
 		"starlight",
 		"plugin",
@@ -25,9 +29,6 @@
 		"url": "https://github.com/fevol/starlight-theme-obsidian.git"
 	},
 	"bugs": "https://github.com/fevol/starlight-theme-obsidian/issues",
-	"devDependencies": {
-		"prettier": "^3.3.3"
-	},
 	"scripts": {
 		"format": "prettier --write .",
 		"release-beta": "bun run scripts/bump-version.ts beta",
@@ -36,6 +37,7 @@
 		"release-major": "bun run scripts/bump-version.ts major"
 	},
 	"dependencies": {
-		"@types/node": "^22.4.0"
+		"@types/node": "^22.4.0",
+		"prettier": "^3.3.3"
 	}
 }
