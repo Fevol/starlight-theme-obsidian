@@ -20,6 +20,23 @@
 
 /* ------------- Centered reading changes ------------ */
 
+/* When screen becomes too narrow to neatly contain both title and mobile-toc */
+@media (max-width: 25em) {
+    /* 'Move' title from mobile header to sidebar */
+    .mobile-header {
+        .title-wrapper {
+            display: none;
+        }
+    }
+
+    .sidebar-pane.sidebar-pane.sidebar-pane {
+        .title-wrapper {
+            display: block;
+        }
+    }
+}
+
+
 /* When only left-sidebar or both sidebars are visible */
 @media (min-width: 50em) {
     /* Make sidebars sticky w.r.t scrolled content */
@@ -29,6 +46,10 @@
         align-self: flex-start;
         z-index: 1;
         overflow-y: hidden;
+    }
+
+    .page {
+        flex-direction: row;
     }
 
     .mobile-header {
@@ -60,10 +81,6 @@
         border-bottom: 1px solid var(--sl-color-hairline);
 
         mobile-starlight-toc {
-            summary {
-                height: var(--sl-nav-height);
-            }
-
             .dropdown {
                 top: calc(var(--sl-nav-height) + 1px);
                 left: 0;
@@ -72,7 +89,7 @@
     }
 
     /* Style site search in folded sidebar similar to regular style  */
-    site-search {
+    .sidebar site-search {
         button[data-open-modal] {
             border: 1px solid var(--sl-color-gray-5);
             border-radius: 0.5rem;
@@ -148,13 +165,43 @@
 .mobile-header {
     position: fixed;
     width: 100%;
+    height: var(--sl-nav-height);
     z-index: 5;
     background-color: var(--sl-color-bg-nav);
 
     padding: 0 1rem;
+
     display: flex;
-    align-items: baseline;
+    align-items: center;
+
+    .title-wrapper span {
+        font-size: clamp(0.2rem, 4vmin, var(--sl-text-h4));
+    }
 }
+
+starlight-menu-button {
+    margin-left: auto;
+
+    :is(.inc-spec, button) {
+        scale: 1.5;
+        position: unset;
+        display: flex;
+
+        height: fit-content;
+        width: fit-content;
+        padding: unset;
+
+        color: var(--sl-color-gray-5);
+        background: unset;
+        box-shadow: unset;
+    }
+
+    &[aria-expanded="true"] :is(.inc-spec, button) {
+        background-color: unset;
+        color: var(--sl-color-accent);
+    }
+}
+
 
 /* Change the styling of the mobile starlight ToC */
 mobile-starlight-toc {
@@ -167,6 +214,7 @@ mobile-starlight-toc {
 
         summary {
             border-bottom: unset;
+            padding: 0 0.5rem
         }
 
         /* Fix "On this page" dropdown first element not having a top border, make it absolutely positioned */
@@ -186,9 +234,7 @@ mobile-starlight-toc {
 
 /* Reorder page such that content and sidebar are adjacent to each other */
 .page {
-    flex-direction: row;
     justify-content: center;
-
     scrollbar-gutter: stable;
 }
 
@@ -243,11 +289,6 @@ footer {
     }
 }
 
-/* Adapted from @Hideoo/starlight-theme-rapide */
-.sl-steps > li:last-of-type:after {
-    background: linear-gradient(to bottom, var(--sl-color-hairline-light), var(--sl-color-bg) 85%);
-}
-
 /* --------------------------------------------------- */
 
 
@@ -295,14 +336,20 @@ footer {
 
 /* ------------- General Content Styling ------------- */
 .sl-markdown-content {
+    /* Add margin around horizontal lines */
     :is(.inc-spec, hr) {
         margin: 2rem 0 0 0;
     }
 
-    /* Use accent color for hovering over elements */
+    /* Use accent color for hovering over link elements */
     a:hover:not(:where(.not-content *)) {
         color: var(--sl-color-accent);
     }
+}
+
+/* Steps line styling (Adapted from @Hideoo/starlight-theme-rapide) */
+.sl-steps > li:last-of-type:after {
+    background: linear-gradient(to bottom, var(--sl-color-hairline-light), var(--sl-color-bg) 85%);
 }
 /* --------------------------------------------------- */
 
