@@ -365,13 +365,13 @@ footer {
 
 
 /* ------------------ Badge Styling ----------------- */
-.sl-badge {
+.sl-badge.sl-badge {
     border-radius: var(--sl-border-radius-sm);
     border: unset;
 }
 
 /* Impossible to disable variable override, so it needs to be specified each time */
-.sidebar-content a[aria-current="page"] > .sl-badge {
+.sidebar-content a[aria-current="page"] > .sl-badge.sl-badge {
     color: var(--sl-color-text-badge);
     background-color: var(--sl-color-bg-badge);
 
