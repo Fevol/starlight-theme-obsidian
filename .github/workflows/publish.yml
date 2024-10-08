@@ -30,36 +30,36 @@ jobs:
         uses: withastro/action@v3
         with:
           path: ./docs
-#      - name: Create NPM Release
-#        if: ${{ !contains(github.ref_name, 'beta') }}
-#        run: |
-#          cd packages/starlight-theme-obsidian
-#          npm publish
-#        env:
-#          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-#
-#      - name: Create Beta NPM Release
-#        if: ${{ contains(github.ref_name, 'beta') }}
-#        run: |
-#          cd packages/starlight-theme-obsidian
-#          npm publish --tag beta
-#        env:
-#          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-#
-#      - name: Create Archive
-#        run: |
-#          mkdir -p dist
-#          cd packages/starlight-theme-obsidian
-#          rm -f bun.lockb .npmignore
-#          zip -r ../../dist/starlight-theme-obsidian-${{ github.ref_name }}.zip .
-#
-#      - name: Create Release
-#        uses: softprops/action-gh-release@v2
-#        with:
-#          files: |
-#            dist/starlight-theme-obsidian-${{ github.ref_name }}.zip
-#          token: ${{ secrets.GITHUB_TOKEN }}
-#          prerelease: ${{ contains(github.ref_name, 'beta') }}
+      - name: Create NPM Release
+        if: ${{ !contains(github.ref_name, 'beta') }}
+        run: |
+          cd packages/starlight-theme-obsidian
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create Beta NPM Release
+        if: ${{ contains(github.ref_name, 'beta') }}
+        run: |
+          cd packages/starlight-theme-obsidian
+          npm publish --tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create Archive
+        run: |
+          mkdir -p dist
+          cd packages/starlight-theme-obsidian
+          rm -f bun.lockb .npmignore
+          zip -r ../../dist/starlight-theme-obsidian-${{ github.ref_name }}.zip .
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/starlight-theme-obsidian-${{ github.ref_name }}.zip
+          token: ${{ secrets.GITHUB_TOKEN }}
+          prerelease: ${{ contains(github.ref_name, 'beta') }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
