@@ -20,36 +20,27 @@
 
 /* ------------- Centered reading changes ------------ */
 
-/* When screen becomes too narrow to neatly contain both title and mobile-toc */
-@media (max-width: 25em) {
-    /* 'Move' title from mobile header to sidebar */
-    .mobile-header {
-        .title-wrapper {
-            display: none;
-        }
-    }
-
-    .sidebar-pane.sidebar-pane.sidebar-pane {
-        .title-wrapper {
-            display: block;
-        }
-    }
-}
-
-
 /* When only left-sidebar or both sidebars are visible */
 @media (min-width: 50em) {
-    /* Make sidebars sticky w.r.t scrolled content */
+    /* Align sidebar and content next to each other, make scrollable, add padding for centered reading */
+    .page {
+        flex-direction: row;
+        height: 100vh;
+        overflow: scroll;
+        /* This expression can become negative (has no effect) */
+        padding-left: calc((100vw - var(--sl-content-width) - 2 * var(--sl-sidebar-width)) / 2);
+    }
+
+    /* Make sidebars sticky w.r.t scrolled content  */
     .sidebar, .right-sidebar-container {
         position: sticky;
         top: 0;
         align-self: flex-start;
         z-index: 1;
-        overflow-y: hidden;
-    }
+        height: inherit;
 
-    .page {
-        flex-direction: row;
+        /* Ensure that the sidebar is either this size or smaller */
+        max-width: var(--sl-sidebar-width);
     }
 
     .mobile-header {
@@ -70,6 +61,22 @@
     .mobile-header {
         display: none;
         visibility: hidden;
+    }
+}
+
+/* When screen becomes too narrow to neatly contain both title and mobile-toc */
+@media (max-width: 23em) {
+    /* 'Move' title from mobile header to sidebar */
+    .mobile-header {
+        .title-wrapper {
+            display: none;
+        }
+    }
+
+    .sidebar-pane.sidebar-pane.sidebar-pane {
+        .title-wrapper {
+            display: block;
+        }
     }
 }
 
@@ -116,11 +123,11 @@
     }
 
 
-    /* Hide site sidebar on left, make it take up the entire screen, animate reveal */
+    /* Hide site sidebar on left, make it take up the entire screen (below mobile ToC), animate reveal */
     .sidebar-pane.sidebar-pane {
         position: fixed;
         width: 100%;
-        height: 100%;
+        height: calc(100vh - var(--sl-nav-height));
         z-index: 2;
 
         visibility: unset;
@@ -174,62 +181,104 @@
     display: flex;
     align-items: center;
 
-    .title-wrapper span {
-        font-size: clamp(0.2rem, 4vmin, var(--sl-text-h4));
+    /* Determines the speed at which the title becomes smaller when overflowing */
+    .title-wrapper {
+        flex-shrink: 1;
+        span {
+            font-size: clamp(0.2rem, 3vmin, var(--sl-text-h4));
+        }
+    }
+
+    /* Restyle the menu button to not be contained within a circle */
+    starlight-menu-button {
+        flex-shrink: 0;
+        margin-left: auto;
+
+        :is(.inc-spec, button) {
+            scale: 1.5;
+            position: unset;
+            display: flex;
+
+            height: fit-content;
+            width: fit-content;
+            padding: unset;
+
+            color: var(--sl-color-gray-5);
+            background: unset;
+            box-shadow: unset;
+        }
+
+        &[aria-expanded="true"] :is(.inc-spec, button) {
+            background-color: unset;
+            color: var(--sl-color-accent);
+        }
+    }
+
+
+    /* Change the styling of the mobile starlight ToC */
+    mobile-starlight-toc {
+        flex-shrink: 0;
+
+        nav {
+            /* Draw mobile ToC on top, align on left side with site sidebar */
+            position: unset;
+            border-top: unset;
+
+            /* Remove hairline border on bottom of "On this page" element (moved to mobile-header) */
+
+            summary {
+                border-bottom: unset;
+                padding: 0 0.5rem
+            }
+
+            /* Fix "On this page" dropdown first element not having a top border, make it absolutely positioned */
+            .dropdown {
+                position: fixed;
+                width: 100%;
+                border-top-color: var(--sl-color-hairline);
+            }
+
+            /* Add hover background */
+            .dropdown a:hover {
+                background-color: var(--sl-color-bg-nav);
+                color: var(--sl-color-accent-high);
+            }
+        }
     }
 }
 
-starlight-menu-button {
-    margin-left: auto;
 
-    :is(.inc-spec, button) {
-        scale: 1.5;
-        position: unset;
-        display: flex;
-
-        height: fit-content;
-        width: fit-content;
-        padding: unset;
-
-        color: var(--sl-color-gray-5);
-        background: unset;
-        box-shadow: unset;
-    }
-
-    &[aria-expanded="true"] :is(.inc-spec, button) {
-        background-color: unset;
-        color: var(--sl-color-accent);
-    }
+/* Remove border of mobile preferences */
+.mobile-preferences {
+    border-top: unset;
 }
 
+/* Make sidebar only take up viewport height, remove top padding for better scroll behaviour */
+.sidebar-content {
+    height: inherit;
+    padding-top: unset;
+}
 
-/* Change the styling of the mobile starlight ToC */
-mobile-starlight-toc {
-    nav {
-        /* Draw mobile ToC on top, align on left side with site sidebar */
-        position: unset;
-        border-top: unset;
+/* Make sidebar scrollable (with persistence) */
+/* @note: if scrollable property is placed lower in the hierarchy, persistence will not function */
+.sidebar-pane {
+    height: inherit;
+    overflow-y: scroll;
+    border-inline-end: unset;
+}
 
-        /* Remove hairline border on bottom of "On this page" element (moved to mobile-header) */
+/* Make sidebar positioned within content (instead of absolute) */
+.sidebar-pane, .right-sidebar {
+    position: unset;
+}
 
-        summary {
-            border-bottom: unset;
-            padding: 0 0.5rem
-        }
-
-        /* Fix "On this page" dropdown first element not having a top border, make it absolutely positioned */
-        .dropdown {
-            position: fixed;
-            width: 100%;
-            border-top-color: var(--sl-color-hairline);
-        }
-
-        /* Add hover background */
-        .dropdown a:hover {
-            background-color: var(--sl-color-bg-nav);
-            color: var(--sl-color-accent-high);
-        }
-    }
+/* Make sidebar information and buttons sticky */
+.sidebar-top {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--sl-color-bg-nav);
+    padding-top: 1em;
 }
 
 /* Reorder page such that content and sidebar are adjacent to each other */
@@ -238,15 +287,7 @@ mobile-starlight-toc {
     scrollbar-gutter: stable;
 }
 
-/* Make sidebar positioned within content (instead of absolute) */
-.sidebar-pane, .right-sidebar {
-    position: unset;
-}
 
-/* Remove border between content and sidebar */
-.sidebar-pane {
-    border-inline-end: unset;
-}
 
 /* Remove border between page heading and content */
 .content-panel + .content-panel {
@@ -271,8 +312,8 @@ footer {
 /* Limit the width for centered reading */
 .main-frame {
     padding-inline-start: unset;
-    flex: 1;
-    max-width: calc(var(--sl-content-width) + var(--sl-sidebar-width));
+    overflow: scroll;
+    width: 100%;
 }
 
 .main-pane {
@@ -305,26 +346,8 @@ footer {
 }
 
 .sidebar-content {
-    .sidebar-top {
-        order: 0;
-    }
-
-    site-search button {
-        order: 1;
-    }
-
     div.md\:sl-hidden {
-        display: initial;
-        order: 2;
-
-        .mobile-preferences {
-            border-top: unset;
-            padding: 0;
-        }
-    }
-
-    sl-sidebar-state-persist ul {
-        order: 3;
+        display: none;
     }
 }
 
