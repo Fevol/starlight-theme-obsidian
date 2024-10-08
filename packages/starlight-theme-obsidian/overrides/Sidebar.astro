@@ -3,6 +3,7 @@ import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Sidebar.astro';
 import Search from 'virtual:starlight/components/Search';
 import SiteTitle from 'virtual:starlight/components/SiteTitle';
+import MobileMenuFooter from 'virtual:starlight/components/MobileMenuFooter';
 
 import config from 'virtual:starlight/user-config';
 
@@ -14,8 +15,10 @@ const shouldRenderSearch = config.pagefind || config.components.Search !== '@ast
     <div class="title-wrapper ">
         <SiteTitle {...Astro.props} />
     </div>
-</div>
 
-{shouldRenderSearch && <Search {...Astro.props} />}
+    {shouldRenderSearch && <Search {...Astro.props} />}
+
+    <MobileMenuFooter {...Astro.props} />
+</div>
 
 <Default {...Astro.props}><slot /></Default>
