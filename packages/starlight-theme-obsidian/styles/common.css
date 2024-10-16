@@ -284,6 +284,10 @@
     top: 0;
     z-index: 1;
     background-color: var(--sl-color-bg-nav);
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
     padding-top: 1em;
 }
 
