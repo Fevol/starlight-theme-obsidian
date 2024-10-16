@@ -1,1 +1,3 @@
-export { pageSchema } from 'starlight-site-graph/schema';
+import { pageSiteGraphSchema } from 'starlight-site-graph/schema';
+
+export const pageThemeObsidianSchema = pageSiteGraphSchema;

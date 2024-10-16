@@ -42,7 +42,24 @@ import { PackageManagers } from 'starlight-package-managers'
                 ],
             })
         ```
-    3. [Start the development server](https://starlight.astro.build/getting-started/#start-the-development-server) to preview the theme in action.
+	3. Add the Obsidian Theme [content schema](https://docs.astro.build/en/guides/content-collections/#defining-a-collection-schema)
+		to your pages to enable type checking on the page's frontmatter, you will need to
+		define the `src/content/config.ts` file if it doesn't exist yet.
+		```diff lang="ts"
+		// content/docs/config.ts
+		+	import { docsSchema } from '@astrojs/starlight/schema';
+		+	import { defineCollection } from 'astro:content';
+		+	import { pageThemeObsidianSchema } from 'starlight-theme-obsidian/schema';
+		+
+		+	export const collections = {
+		+		docs: defineCollection({
+		+			schema: docsSchema({
+		+				extend: pageThemeObsidianSchema
+		+			})
+		+		})
+		+	};
+		```
+    4. [Start the development server](https://starlight.astro.build/getting-started/#start-the-development-server) to preview the theme in action.
 </Steps>
 
 That's it! You should now see the Starlight Obsidian theme applied to your Starlight website.

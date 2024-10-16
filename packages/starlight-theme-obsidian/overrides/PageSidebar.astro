@@ -3,7 +3,7 @@ import TableOfContents from 'virtual:starlight/components/TableOfContents';
 
 import type { Props } from '@astrojs/starlight/props';
 
-import { PageGraph, Backlinks } from "starlight-site-graph/components";
+import { PageGraph, PageBacklinks } from "starlight-site-graph/components";
 
 ---
 
@@ -24,9 +24,9 @@ import { PageGraph, Backlinks } from "starlight-site-graph/components";
     )
 }
 
-<Backlinks {...Astro.props} class="right-sidebar-panel backlinks-panel">
+<PageBacklinks {...Astro.props} class="right-sidebar-panel backlinks-panel">
     <h2 slot="title">{Astro.locals.t('starlight-site-graph.backlinks')}</h2>
-</Backlinks>
+</PageBacklinks>
 
 
 <style>

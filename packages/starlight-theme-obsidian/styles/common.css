@@ -117,7 +117,7 @@
             margin-inline-start: auto
         }
 
-         :is(button, .inc-spec) span{
+        :is(button, .inc-spec) span {
             display: block;
         }
     }
@@ -182,14 +182,17 @@
     align-items: center;
 
     /* Determines the speed at which the title becomes smaller when overflowing */
+
     .title-wrapper {
         flex-shrink: 1;
+
         span {
             font-size: clamp(0.2rem, 3vmin, var(--sl-text-h4));
         }
     }
 
     /* Restyle the menu button to not be contained within a circle */
+
     starlight-menu-button {
         flex-shrink: 0;
         margin-left: auto;
@@ -216,6 +219,7 @@
 
 
     /* Change the styling of the mobile starlight ToC */
+
     mobile-starlight-toc {
         flex-shrink: 0;
 
@@ -232,6 +236,7 @@
             }
 
             /* Fix "On this page" dropdown first element not having a top border, make it absolutely positioned */
+
             .dropdown {
                 position: fixed;
                 width: 100%;
@@ -239,6 +244,7 @@
             }
 
             /* Add hover background */
+
             .dropdown a:hover {
                 background-color: var(--sl-color-bg-nav);
                 color: var(--sl-color-accent-high);
@@ -286,7 +292,6 @@
     justify-content: center;
     scrollbar-gutter: stable;
 }
-
 
 
 /* Remove border between page heading and content */
@@ -354,17 +359,16 @@ footer {
 /* --------------------------------------------------- */
 
 
-
-
-
 /* ------------- General Content Styling ------------- */
 .sl-markdown-content {
     /* Add margin around horizontal lines */
+
     :is(.inc-spec, hr) {
         margin: 2rem 0 0 0;
     }
 
     /* Use accent color for hovering over link elements */
+
     a:hover:not(:where(.not-content *)) {
         color: var(--sl-color-accent);
     }
@@ -374,8 +378,8 @@ footer {
 .sl-steps > li:last-of-type:after {
     background: linear-gradient(to bottom, var(--sl-color-hairline-light), var(--sl-color-bg) 85%);
 }
-/* --------------------------------------------------- */
 
+/* --------------------------------------------------- */
 
 
 /* -------- Obsidian-inspired Callout Styling -------- */
@@ -401,18 +405,23 @@ footer {
     &.default {
         --sl-color-bg-badge: var(--sl-badge-default-bg);;
     }
+
     &.note {
         --sl-color-bg-badge: var(--sl-badge-note-bg);
     }
+
     &.danger {
         --sl-color-bg-badge: var(--sl-badge-danger-bg);
     }
+
     &.success {
         --sl-color-bg-badge: var(--sl-badge-success-bg);
     }
+
     &.tip {
         --sl-color-bg-badge: var(--sl-badge-tip-bg);
     }
+
     &.caution {
         --sl-color-bg-badge: var(--sl-badge-caution-bg);
     }
@@ -441,6 +450,7 @@ starlight-file-tree {
     margin: 1rem 1rem 0rem 1rem;
     border-radius: var(--sl-border-radius-lg);
 }
+
 /* --------------------------------------------------- */
 
 
@@ -547,6 +557,7 @@ starlight-file-tree {
         --sl-details-border-color: var(--sl-details-border-color--hover);
     }
 }
+
 /* --------------------------------------------------- */
 
 /* --------------- Link Button Styling --------------- */
@@ -568,6 +579,7 @@ starlight-file-tree {
         color: var(--sl-color-accent);
     }
 }
+
 /* --------------------------------------------------- */
 
 
@@ -585,6 +597,7 @@ starlight-file-tree {
     background-color: var(--sl-color-black);
     box-shadow: 0 0 0 1px var(--sl-color-accent);
 }
+
 /* --------------------------------------------------- */
 
 /* ------------------- ToC Styling ------------------- */
@@ -619,8 +632,8 @@ starlight-file-tree {
 .sidebar-pane ul ul li:has(> a:not([aria-current='page']):is(:hover, :focus-visible)) {
     border-inline-start-color: var(--sl-color-gray-2);
 }
-/* --------------------------------------------------- */
 
+/* --------------------------------------------------- */
 
 
 /* Ensure that graph inside sidebar matches width of container */
@@ -630,4 +643,5 @@ starlight-file-tree {
         max-width: var(--slsg-graph-width);
     }
 }
+
 /* ----------------------------------------------------------- */
