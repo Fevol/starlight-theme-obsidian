@@ -26,7 +26,7 @@
     .page {
         flex-direction: row;
         height: 100vh;
-        overflow: scroll;
+        overflow-y: scroll;
         /* This expression can become negative (has no effect) */
         padding-left: calc((100vw - var(--sl-content-width) - 2 * var(--sl-sidebar-width)) / 2);
     }
@@ -289,6 +289,7 @@
 
 /* Reorder page such that content and sidebar are adjacent to each other */
 .page {
+    overflow: clip;
     justify-content: center;
     scrollbar-gutter: stable;
 }
@@ -317,7 +318,7 @@ footer {
 /* Limit the width for centered reading */
 .main-frame {
     padding-inline-start: unset;
-    overflow: scroll;
+    overflow-y: scroll;
     width: 100%;
 }
 
@@ -644,4 +645,23 @@ starlight-file-tree {
     }
 }
 
+/* ----------------------------------------------------------- */
+
+/* ------------------ Scrollbar Styling ---------------------- */
+.sidebar-pane {
+    scrollbar-width: thin;
+}
+
+body {
+    scrollbar-color: var(--sl-color-hairline) transparent;
+    scrollbar-gutter: stable;
+
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+}
 /* ----------------------------------------------------------- */
