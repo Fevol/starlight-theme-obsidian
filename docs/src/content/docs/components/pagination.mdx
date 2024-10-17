@@ -1,0 +1,119 @@
+---
+title: <Pagination>
+description: Learn what the <Pagination> override does, and how to adapt it.
+sidebar:
+  order: 4
+---
+
+import { Steps } from '@astrojs/starlight/components'
+
+The `<Pagination>` component is an override of [Starlight](https://starlight.astro.build)'s
+[`<Pagination>`](https://starlight.astro.build/reference/overrides/#pagination),
+which has been redefined to allow for better styling.
+
+This code originally comes from [Hideoo](https://github.com/Hideoo)'s [Starlight Rapide Theme](https://starlight-theme-rapide.vercel.app/),
+the original source can be found [here](https://github.com/HiDeoo/starlight-theme-rapide/blob/main/packages/starlight-theme-rapide/overrides/Pagination.astro).
+
+## Usage
+
+### Overriding
+
+If you want to extend the `<Pagination>` component for your own website, you can do so by creating your own override as seen below.
+
+<Steps>
+	1. Create your own `Pagination.astro` component in the `src/overrides` directory (or `src/components` if you prefer).
+		```astro
+		---
+		import { Icon } from '@astrojs/starlight/components'
+		import type { Props } from '@astrojs/starlight/props'
+
+		const { dir, pagination } = Astro.props
+		const { prev, next } = pagination
+		const isRtl = dir === 'rtl'
+		---
+
+		{
+			(prev || next) && (
+				<div class="pagination-links" dir={dir}>
+					{prev && (
+						<a href={prev.href} rel="prev">
+							<div>
+								<Icon name={isRtl ? 'right-arrow' : 'left-arrow'} size="1.25rem" />
+								{Astro.locals.t('page.previousLink')}
+							</div>
+							<p class="link-title">{prev.label}</p>
+						</a>
+					)}
+					{next && (
+						<a href={next.href} rel="next">
+							<div>
+								{Astro.locals.t('page.nextLink')}
+								<Icon name={isRtl ? 'left-arrow' : 'right-arrow'} size="1.25rem" />
+							</div>
+							<p class="link-title">{next.label}</p>
+						</a>
+					)}
+				</div>
+			)
+		}
+
+		<style>
+		.pagination-links {
+			display: flex;
+		}
+
+		.pagination-links a {
+			text-decoration: none;
+		}
+
+		.pagination-links a div {
+			align-items: center;
+			color: var(--sl-color-gray-3);
+			display: flex;
+			font-size: var(--sl-text-sm);
+			gap: 0.15rem;
+		}
+
+		.pagination-links a p {
+			color: var(--sl-color-gray-2);
+			font-weight: 600;
+			margin-inline: 0.25rem;
+		}
+
+		.pagination-links a:is(:hover, :focus-visible) div {
+			color: var(--sl-color-gray-2);
+		}
+
+		.pagination-links a:is(:hover, :focus-visible) p {
+			color: var(--sl-color-white);
+		}
+
+		[rel='next'] {
+			margin-left: auto;
+			text-align: end;
+		}
+
+		[rel='next'] div {
+			justify-content: flex-end;
+		}
+		</style>
+		```
+	2. Add the override to your `astro.config.mjs` file.
+		```diff lang="js"
+		// astro.config.mjs
+		import starlight from '@astrojs/starlight';
+		import { defineConfig } from 'astro/config';
+
+		export default defineConfig({
+			integrations: [
+				starlight({
+					title: 'My Docs',
+		+			components: {
+		+				// Override the theme's `Pagination` component.
+		+				Pagination: './src/overrides/Pagination.astro'
+		+			},
+				}),
+			],
+		})
+		```
+</Steps>

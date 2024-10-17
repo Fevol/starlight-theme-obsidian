@@ -1,0 +1,122 @@
+---
+title: <PageSidebar>
+description: Learn what the <PageSidebar> override does, and how to adapt it.
+sidebar:
+  order: 2
+---
+
+import { Steps } from '@astrojs/starlight/components'
+
+The `<PageSidebar>` component is an override of both [Starlight](https://starlight.astro.build)'s
+[`<PageSidebar>`](https://starlight.astro.build/reference/overrides/#pagesidebar),
+as well as [Starlight Site Graph](https://fevol.github.io/starlight-site-graph)'s
+[`<PageSidebar>`](https://fevol.github.io/starlight-site-graph/components/pagesidebar)
+component, which is extended to remove the Mobile Toc (which is moved to the [`<PageFrame>`](/starlight-theme-obsidian/components/pageframe) override).
+
+This component is the one that is rendered on the right side of the page, and usually contains information
+related to that specific page (such as the table of contents).
+
+The sidebar itself does not handle any logic, if you want to hide either of the components,
+there are several different ways to do so.
+For more information, check out
+either the [`<PageGraph>`](https://fevol.github.io/starlight-site-graph/components/pagegraph#visibility) or
+[`<PageBacklinks>`](https://fevol.github.io/starlight-site-graph/components/pagebacklinks#visibility) documentation.
+
+
+## Usage
+
+### Overriding
+
+If you want to extend the `<PageSidebar>` component for your own website, while keeping the graph and backlinks
+components, you can do so by creating your own override as seen below.
+
+Note that including the `<style>` tag is important, as none of the default styles are otherwise included.
+
+<Steps>
+	1. Create your own `PageSidebar.astro` component in the `src/overrides` directory (or `src/components` if you prefer).
+		```astro
+		// src/overrides/PageSidebar.astro
+		---
+		import TableOfContents from 'virtual:starlight/components/TableOfContents';
+		import type { Props } from '@astrojs/starlight/props';
+		import { PageGraph, PageBacklinks } from "starlight-site-graph/components";
+		---
+
+		<PageGraph {...Astro.props} class="right-sidebar-panel graph-panel">
+			<h2 slot="title">{Astro.locals.t('starlight-site-graph.graph')}</h2>
+		</PageGraph>
+
+		{
+			Astro.props.toc && (
+			<>
+				<div class="right-sidebar-panel sl-hidden lg:sl-block">
+					<div class="sl-container">
+						<TableOfContents {...Astro.props} />
+					</div>
+				</div>
+			</>
+			)
+		}
+
+		<PageBacklinks {...Astro.props} class="right-sidebar-panel backlinks-panel">
+			<h2 slot="title">{Astro.locals.t('starlight-site-graph.backlinks')}</h2>
+		</PageBacklinks>
+
+		<style>
+			.right-sidebar-panel {
+				padding: 1rem var(--sl-sidebar-pad-x);
+			}
+			.sl-container {
+				width: calc(var(--sl-sidebar-width) - 2 * var(--sl-sidebar-pad-x));
+			}
+			.right-sidebar-panel :global(h2) {
+				color: var(--sl-color-white);
+				font-size: var(--sl-text-h5);
+				font-weight: 600;
+				line-height: var(--sl-line-height-headings);
+				margin-bottom: 0.5rem;
+			}
+			.right-sidebar-panel :global(:where(a)) {
+				display: block;
+				font-size: var(--sl-text-xs);
+				text-decoration: none;
+				color: var(--sl-color-gray-3);
+				overflow-wrap: anywhere;
+			}
+			.right-sidebar-panel :global(:where(a):hover) {
+				color: var(--sl-color-white);
+			}
+			@media (min-width: 72rem) {
+				.sl-container {
+					max-width: calc(
+						(
+						(
+						100vw - var(--sl-sidebar-width) - 2 * var(--sl-content-pad-x) - 2 *
+						var(--sl-sidebar-pad-x)
+						) * 0.25 /* MAGIC NUMBER 🥲 */
+						)
+					);
+				}
+			}
+		</style>
+		```
+	2. Add the override to your `astro.config.mjs` file.
+		```diff lang="js"
+		// astro.config.mjs
+
+		import { defineConfig } from 'astro/config';
+		import starlight from '@astrojs/starlight';
+
+		export default defineConfig({
+		  integrations: [
+			starlight({
+			  title: 'My Docs with Overrides',
+		+	  components: {
+		+		  // Override the theme's `PageSidebar` component.
+		+		  PageSidebar: './src/overrides/PageSidebar.astro',
+		+	  },
+			}),
+		  ],
+		});
+		```
+</Steps>

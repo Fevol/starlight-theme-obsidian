@@ -1,20 +1,23 @@
 ---
-title: Graph Configuration
+title: Graph
+description: Learn how to configure the graph component in the sidebar.
+sidebar:
+  order: 2
+sitemap:
+  pageTitle: Graph Configuration
 ---
+
+This page provides information on how you can configure the graph component in the sidebar.
 
 ## General configuration
 
-To configure the graph component in the sidebar, refer to the [Starlight Site Graph reference](https://github.com/fevol/starlight-site-graph) for more information.
-
-:::danger[Warning]
-Site Graph plugin reference website is not available at the moment.
-:::
-
+To configure the graph component in the sidebar, refer to the [Starlight Site Graph graph configuration](https://fevol.github.io/starlight-site-graph/configuration/graph) for more information.
 
 ## Examples
+Some common examples are provided below to showcase how you might configure the graph component in the sidebar.
+
 ### Disable the graph on every page
 
-[//]: # (TODO: replace visibilityRules)
 ```diff lang="js"
     // astro.config.mjs
     import starlight from '@astrojs/starlight'
@@ -36,7 +39,7 @@ Site Graph plugin reference website is not available at the moment.
 ```
 
 
-### Remove quick actions from the graph
+### Remove all quick actions from graph
 
 ```diff lang="js"
     // astro.config.mjs

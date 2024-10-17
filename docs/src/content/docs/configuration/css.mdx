@@ -1,15 +1,28 @@
 ---
-title: Theme Configuration
+title: CSS
+description: Learn how to configure the Starlight Obsidian theme in your Starlight site.
+sidebar:
+  order: 1
+sitemap:
+  pageTitle: CSS Configuration
 ---
 
-## General configuration
+## Variable configuration
 
-All of Starlight's [CSS variables](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css) are available for
-configuration, with only minimal changes to the color palette.
+All of Starlight's [CSS variables](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css)
+can be used to customize the theme to your liking.
 
-The only _major_ change is that the background color of the site is set to `#111213` and `#f8f9fa` for dark and light themes, respectively.
+The only variable override made by the theme,
+is that the background color of the site (the `--sl-color-bg` variable) has been set to `#111213` and `#f8f9fa`
+for the dark and light themes respectively.
 Additionally, the sidebar and navigation background color variables have been styled to match the page background.
+Other than that, the theme uses the default Starlight CSS variables for styling the content.
 
+
+## Styling the Graph and Backlinks
+
+You can find more information about configuring the graph and backlinks components
+in Starlight Site Graph's [CSS Configuration](https://fevol.github.io/starlight-site-graph/configuration/css).
 
 ## Setting reading width
 
