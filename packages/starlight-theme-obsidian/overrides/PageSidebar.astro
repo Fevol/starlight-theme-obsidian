@@ -7,7 +7,7 @@ import { PageGraph, PageBacklinks } from "starlight-site-graph/components";
 
 ---
 
-<!-- (STARLIGHT-THEME-OBSIDIAN): Add page graph and backlink components -->
+{/* (STARLIGHT-THEME-OBSIDIAN): Add page graph and backlink components */}
 <PageGraph {...Astro.props} class="right-sidebar-panel graph-panel">
     <h2 slot="title">{Astro.locals.t('starlight-site-graph.graph')}</h2>
 </PageGraph>
@@ -16,6 +16,7 @@ import { PageGraph, PageBacklinks } from "starlight-site-graph/components";
     Astro.props.toc && (
     <>
         <div class="right-sidebar-panel sl-hidden lg:sl-block">
+            {/* (STARLIGHT-THEME-OBSIDIAN): Removed mobile ToC, moved to PageFrame */}
             <div class="sl-container">
                 <TableOfContents {...Astro.props} />
             </div>
@@ -56,12 +57,12 @@ import { PageGraph, PageBacklinks } from "starlight-site-graph/components";
     @media (min-width: 72rem) {
         .sl-container {
             max-width: calc(
-                    (
-                    (
-                    100vw - var(--sl-sidebar-width) - 2 * var(--sl-content-pad-x) - 2 *
-                    var(--sl-sidebar-pad-x)
-                    ) * 0.25 /* MAGIC NUMBER 🥲 */
-                    )
+                (
+                (
+                100vw - var(--sl-sidebar-width) - 2 * var(--sl-content-pad-x) - 2 *
+                var(--sl-sidebar-pad-x)
+                ) * 0.25 /* MAGIC NUMBER 🥲 */
+                )
             );
         }
     }

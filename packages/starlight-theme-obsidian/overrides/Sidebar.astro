@@ -10,7 +10,7 @@ import config from 'virtual:starlight/user-config';
 const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
 ---
 
-<!-- (STARLIGHT-THEME-OBSIDIAN): Reorder site sidebar to always contain site title  -->
+{/* (STARLIGHT-THEME-OBSIDIAN): Reorder site sidebar to always contain site title */}
 <div class="sidebar-top">
     <div class="title-wrapper ">
         <SiteTitle {...Astro.props} />

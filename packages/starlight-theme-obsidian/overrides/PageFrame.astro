@@ -8,7 +8,7 @@ import type { Props } from '../props';
 const { hasSidebar } = Astro.props;
 ---
 
-<!-- (STARLIGHT-THEME-OBSIDIAN): Do not show header component if page has no sidebar, create a separate mobile-header-->
+{/* (STARLIGHT-THEME-OBSIDIAN): Do not show header component if page has no sidebar, create a separate mobile-header component */}
 <div class="page sl-flex">
     {
         hasSidebar ? (
