@@ -423,7 +423,7 @@ footer {
     }
 }
 
-/* Steps line styling (Adapted from @Hideoo/starlight-theme-rapide) */
+/* Steps line styling (Adapted from @HiDeoo/starlight-theme-rapide) */
 .sl-steps > li:last-of-type:after {
     background: linear-gradient(to bottom, var(--sl-color-hairline-light), var(--sl-color-bg) 85%);
 }
@@ -651,7 +651,7 @@ starlight-file-tree {
 
 /* ------------------- ToC Styling ------------------- */
 
-/* Adapted from @Hideoo/starlight-theme-rapide */
+/* Adapted from @HiDeoo/starlight-theme-rapide */
 .sidebar-pane summary {
     flex-direction: row-reverse;
     gap: 0.375rem;
