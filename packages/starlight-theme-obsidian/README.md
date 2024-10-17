@@ -115,7 +115,7 @@ The moon icon used for the site favicon is adapted from [SVG Repo](https://www.s
 
 ## 🤝 Contributors
 
-[Hideoo](https://github.com/HiDeoo/) - For creating the original Starlight Rapide Theme, which this theme is based on. <br>
+[HiDeoo](https://github.com/HiDeoo/) - For creating the original Starlight Rapide Theme, which this theme is based on. <br>
 [mProjectsCode](https://github.com/mProjectsCode) - For providing much-needed feedback on the project.
 
 ---

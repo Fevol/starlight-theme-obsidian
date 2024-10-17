@@ -2,4 +2,4 @@
 
 Todo, add description here.
 
-Credits to @Hideoo for the Starlight theme template.
+Credits to @HiDeoo for the Starlight theme template.
