@@ -1,0 +1,69 @@
+---
+title: <Sidebar>
+description: Learn what the <Sidebar> override does.
+sidebar:
+  order: 1
+---
+
+import { Steps } from '@astrojs/starlight/components'
+
+The `<Sidebar>` component is an override of [Starlight](https://starlight.astro.build)'s
+[`<Sidebar>`](https://starlight.astro.build/reference/overrides/#sidebar), and has been
+reworked to contain the website title, search bar, theme/language switcher, and social icons
+(which were moved from the [`<PageFrame>`](/starlight-theme-obsidian/components/pageframe) component).
+
+This component is the one that is rendered on the left side of the page, and contains
+information about the website itself.
+
+## Usage
+
+### Overriding
+
+If you want to extend the `<Sidebar>` component for your own website, you can do so by creating your own override as seen below.
+
+<Steps>
+	1. Create your own `Sidebar.astro` component in the `src/overrides` directory (or `src/components` if you prefer).
+		```astro
+		---
+		import type { Props } from '@astrojs/starlight/props';
+		import Default from '@astrojs/starlight/components/Sidebar.astro';
+		import Search from 'virtual:starlight/components/Search';
+		import SiteTitle from 'virtual:starlight/components/SiteTitle';
+		import MobileMenuFooter from 'virtual:starlight/components/MobileMenuFooter';
+
+		import config from 'virtual:starlight/user-config';
+
+		const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+		---
+
+		<div class="sidebar-top">
+			<div class="title-wrapper ">
+				<SiteTitle {...Astro.props} />
+			</div>
+
+			{shouldRenderSearch && <Search {...Astro.props} />}
+
+			<MobileMenuFooter {...Astro.props} />
+		</div>
+
+		<Default {...Astro.props}><slot /></Default>
+		```
+	2. Add the `Sidebar` override to your `astro.config.mjs` file.
+		```diff lang="js"
+		// astro.config.mjs
+		import starlight from '@astrojs/starlight'
+		import { defineConfig } from 'astro/config'
+
+		export default defineConfig({
+			integrations: [
+				starlight({
+					title: 'My Docs',
+		+			components: {
+		+				// Override the theme's `Sidebar` component.
+		+				Sidebar: './src/overrides/Sidebar.astro'
+		+			},
+				}),
+			],
+		})
+		```
+</Steps>

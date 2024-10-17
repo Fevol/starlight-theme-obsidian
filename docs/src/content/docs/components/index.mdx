@@ -1,0 +1,52 @@
+---
+title: Overview
+description: Learn what overrides are used in the Starlight Obsidian theme.
+sidebar:
+  order: 1
+---
+
+import { CardGrid } from '@astrojs/starlight/components';
+import { LinkCardIcon } from '../../../components';
+
+There are a couple overrides that are used to make the theme look and feel like it does.
+These overrides are used to change the layout, logic, and style of the default Starlight theme.
+
+## Components
+
+<CardGrid stagger>
+	<LinkCardIcon
+		icon="seti:rescript"
+		title="Sidebar"
+		href="/starlight-site-graph/components/sidebar"
+		description="Overrides Starlight's <code><​Sidebar></code> component, adds icons and search bar to the sidebar."
+	/>
+
+	<LinkCardIcon
+		icon="seti:plan"
+		title="Page Sidebar"
+		href="/starlight-site-graph/components/pagesidebar"
+		description="Overrides Starlight's <code><​PageSidebar></code> component, contains a <code><​PageGraph></code> and <code><​PageBacklinks></code>."
+	/>
+
+	<LinkCardIcon
+		icon="seti:svg"
+		title="Page Frame"
+		href="/starlight-site-graph/components/pageframe"
+		description="Overrides Starlight's <code><​PageFrame></code> component, replaces the Mobile Toc with new components."
+	/>
+
+	<LinkCardIcon
+		icon="right-arrow"
+		title="Pagination"
+		href="/starlight-site-graph/components/pagination"
+		description="Overrides Starlight's <code><​Pagination></code> component, makes the pagination look nicer."
+	/>
+
+	<LinkCardIcon
+		icon="sun"
+		title="ThemeSelect"
+		href="/starlight-site-graph/components/themeselect"
+		description="Overrides Starlight's <code><​ThemeSelect></code> component, makes the theme selector look nicer."
+	/>
+
+</CardGrid>

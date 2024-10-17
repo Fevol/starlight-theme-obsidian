@@ -1,0 +1,41 @@
+---
+title: Backlinks
+description: Learn how to configure the backlinks component in the sidebar.
+sidebar:
+  order: 3
+sitemap:
+  pageTitle: Backlinks Configuration
+---
+
+This page provides information on how you can configure the backlinks component in the sidebar.
+
+## General configuration
+
+To configure the backlinks component in the sidebar, refer to the [Starlight Site Graph backlinks configuration](https://fevol.github.io/starlight-site-graph/configuration/backlinks) for more information.
+
+## Examples
+
+Some common examples are provided below to showcase how you might configure the backlinks component in the sidebar.
+
+### Disable the backlinks on every page
+
+```diff lang="js"
+	// astro.config.mjs
+	import starlight from '@astrojs/starlight'
+	import { defineConfig } from 'astro/config'
+	import starlightThemeObsidian from 'starlight-theme-obsidian'
+
+	export default defineConfig({
+		integrations: [
+			starlight({
+				plugins: [starlightThemeObsidian({
++					backlinksConfig: {
++						visibilityRules: []
++					}
+				})],
+				title: 'My Docs',
+			}),
+		],
+	})
+```
+

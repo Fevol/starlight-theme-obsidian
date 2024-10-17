@@ -1,0 +1,90 @@
+---
+title: Overview
+description: Learn how to configure the plugin.
+sidebar:
+  order: 1
+sitemap:
+  pageTitle: Configuration
+---
+
+import { CardGrid } from '@astrojs/starlight/components';
+import { LinkCardIcon } from '../../../components';
+
+The pages below detail how you can configure the theme to suit your needs.
+In general, you can configure the underlying Starlight Site Graph in several ways:
+1. **Configuration via Plugin settings:** You can configure the plugin by passing options.
+ 	<br/>	See [Starlight Site Graph Settings](https://fevol.github.io/starlight-site-graph/configuration/).
+ 	<br/>	*(this is the most common way to configure the plugin)*
+	```diff lang="js"
+		// astro.config.mjs
+		import starlight from '@astrojs/starlight'
+		import { defineConfig } from 'astro/config'
+			import starlightSiteGraph from 'starlight-site-graph'
+				 export default defineConfig({
+					 integrations: [
+						starlight({
+							plugins: [starlightSiteGraph({
+	+							debug: false, 			// See "General Settings"
+	+							sitemapCongig: {},  	// See "Sitemap Settings"
+	+							graphConfig: {},  		// See "Graph Settings"
+	+							backlinksConfig: {},  	// See "Backlinks Settings"
+							})],
+						 }),
+					 ],
+				 })
+	```
+2. **Configuration via Frontmatter:** You can configure the plugin by specifying frontmatter to your markdown files,
+	this overrides the regular plugin settings.
+	<br/>	See [Frontmatter Configuration](https://fevol.github.io/starlight-site-graph/configuration/frontmatter).
+	```diff lang="md"
+	// src/content/docs/my-page.md
+	---
+	 title: My Page
+	+ links: [],		// See "Frontmatter Configuration - Sitemap"
+	+ tags: [],			//   ...
+	+ sitemap: ...		//   ...
+	+ graph: ...		// See "Frontmatter Configuration - Graph"
+	+ backlinks: ...	// See "Frontmatter Configuration - Backlinks"
+	---
+
+	My page content goes here!
+	```
+3. **Configuration via CSS:** You can configure the appearance of the theme and its components using CSS.
+	<br/>	See [CSS Configuration](/starlight-site-graph/configuration/css).
+	```diff lang="css"
+	/* src/styles/global.css */
+	:root[data-theme='dark'] {
+	+ 	--slsg-node-color: red; /* See "CSS Configuration - Variables" */
+	}
+
+	:root[data-theme='light'] {
+	+ 	--slsg-node-color: blue;
+	}
+
+	.graph-component {
+	+   /* Any CSS */
+	}
+	```
+
+## Configuration Pages
+
+<CardGrid stagger>
+	<LinkCardIcon
+		icon="pencil"
+		title="CSS Configuration"
+		href="/starlight-theme-obsidian/configuration/css/"
+		description="Configure the appearance of the components using CSS."
+	/>
+	<LinkCardIcon
+		icon="seti:graphql"
+		title="Graph Settings"
+		href="/starlight-theme-obsidian/configuration/graph/"
+		description="Configure the appearance and behavior of the graph."
+	/>
+	<LinkCardIcon
+		icon="external"
+		title="Backlinks Settings"
+		href="/starlight-theme-obsidian/configuration/backlinks/"
+		description="Configure the appearance of backlinks."
+	/>
+</CardGrid>
