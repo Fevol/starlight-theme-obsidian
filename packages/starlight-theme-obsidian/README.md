@@ -111,6 +111,9 @@ Where applicable, attribution has been added to each relevant piece of code (or 
 
 The moon icon used for the site favicon is adapted from [SVG Repo](https://www.svgrepo.com/svg/120949/moon), which has a CC0 license.
 
+This README makes use of [shields.io](https://shields.io) for adding badges to display some cursory information about the project.
+
+
 <a name="contributors"></a>
 
 ## 🤝 Contributors
