@@ -35,6 +35,6 @@
 	"peerDependencies": {
 		"@astrojs/starlight": "^0.28.2",
 		"astro": "^4.15.11",
-		"starlight-site-graph": "^0.1.7"
+		"starlight-site-graph": "^0.1.8"
 	}
 }
