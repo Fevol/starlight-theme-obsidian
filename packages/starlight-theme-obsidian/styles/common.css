@@ -31,8 +31,8 @@
         padding-left: calc((100vw - var(--sl-content-width) - 2 * var(--sl-sidebar-width)) / 2);
     }
 
-    /* Make sidebars sticky w.r.t scrolled content  */
-    .sidebar, .right-sidebar-container {
+    /* Make sidebar sticky w.r.t scrolled content  */
+    .sidebar {
         position: sticky;
         top: 0;
         align-self: flex-start;
@@ -61,6 +61,49 @@
     .mobile-header {
         display: none;
         visibility: hidden;
+    }
+
+    /* Make right sidebar sticky w.r.t scrolled content  */
+    .right-sidebar-container {
+        position: sticky;
+        top: 0;
+        align-self: flex-start;
+        z-index: 1;
+        height: inherit;
+
+        /* Ensure that the sidebar is either this size or smaller */
+        max-width: var(--sl-sidebar-width);
+    }
+
+    /* FIXME: This is very, very, very bad.
+        Some background:
+            The .right-sidebar-container is a sticky element, so it has its own stacking context.
+            That means that the blur filter applied by the .background-blur element within the graph-component
+               is _not_ applied to the .sidebar (left sidebar) due to it being in a different stacking context;
+               regardless of what the z-index of the .sidebar is.
+        So there are four solutions:
+            1. Just keep it as is and reason that the left sidebar should always be drawn on top (nope, bad).
+            2. Rework the right sidebar so it is an absolutely positioned element so that the usage of sticky can be avoided
+                (a lot of work, also requires a lot of finagling with the page and right sidebar widths and offsets
+                 to make the sizing and positioning work properly).
+              (Solution that will need to be implemented eventually)
+            3. Keep all the code as is and make the right sidebar positioned normally (no sticky)
+                 -> This is an undesirable solution: when the user has scrolled down, the sidebar will completely disappear when fullscreen is toggled
+            4. Keep all the code as is and only make the right sidebar positioned fixed when the background blur is applied
+               Then, approximate the width and relative position of the sidebar based on the current available space.
+        Currently, I opted for the fourth solution, but it does have the issue that when the sidebar is slightly folded,
+           everything is off by a bit, and there will be a visible jump when toggling fullscreen (happens between 1151px and 1300px)
+        Anyways, good luck to future me when you eventually get around to fixing this issue, xxx
+    */
+    body:has(.background-blur) {
+        .right-sidebar-container {
+            --right-sidebar-width: clamp(var(--sl-sidebar-width) / 2, calc(100vw - var(--sl-content-width) - var(--sl-sidebar-width)), var(--sl-sidebar-width));
+            background-color: var(--sl-color-bg-sidebar);
+
+            position: fixed;
+            right: calc(50vw - var(--right-sidebar-width) - var(--sl-content-width) / 2);
+            width: var(--right-sidebar-width);
+        }
     }
 }
 
