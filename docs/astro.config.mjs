@@ -49,6 +49,9 @@ export default defineConfig({
                     autogenerate: { directory: 'examples' },
                 },
             ],
+            components: {
+                Head: './src/overrides/Head.astro',
+            },
         }),
     ],
     devToolbar: { enabled: false },
