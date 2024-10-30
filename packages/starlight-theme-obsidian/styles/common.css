@@ -297,6 +297,12 @@
     }
 }
 
+/* Fixes screen reader elements being positioned outside of page in some browsers (Chrome),
+    causing unexpected vertical overflow of the body
+*/
+.sr-only {
+    position: relative;
+}
 
 /* Remove border of mobile preferences */
 .mobile-preferences {
