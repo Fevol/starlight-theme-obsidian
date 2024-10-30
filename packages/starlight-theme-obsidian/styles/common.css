@@ -384,6 +384,8 @@ footer {
 
 /* Center content if no sidebars are present (e.g. banner splash) */
 .page:not(:has(>.sidebar)) {
+    padding-left: unset;
+
     .main-pane {
         margin-left: auto;
         margin-right: auto;
