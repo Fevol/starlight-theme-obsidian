@@ -365,7 +365,6 @@
 /* Reorder page such that content and sidebar are adjacent to each other */
 .page {
     overflow: clip;
-    justify-content: center;
     scrollbar-gutter: stable;
 }
 
