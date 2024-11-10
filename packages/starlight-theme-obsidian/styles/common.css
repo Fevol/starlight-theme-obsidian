@@ -319,9 +319,30 @@
 /* @note: if scrollable property is placed lower in the hierarchy, persistence will not function */
 .sidebar-pane {
     height: inherit;
-    overflow-y: scroll;
     border-inline-end: unset;
 }
+
+/* FIXME: Inconsistent scrolling behaviour between FireFox and Chrome,
+    Current situation: .sidebar-pane { overflow-y: scroll; }\
+        In Firefox, position sticky does not work
+    When changing this to .sidebar-content { overflow-y: scroll; }, it does not work in Chrome (unscrollable)
+    So solution is to use @supports to apply different rules based on browser
+*/
+@supports not(-moz-appearance:none) {
+    .sidebar-pane {
+        overflow-y: scroll;
+    }
+}
+
+@supports(-moz-appearance:none) {
+    .sidebar-content {
+        overflow-y: scroll;
+        scrollbar-width: thin;
+        scrollbar-gutter: stable;
+    }
+}
+
+
 
 /* Make sidebar positioned within content (instead of absolute) */
 .sidebar-pane, .right-sidebar {
