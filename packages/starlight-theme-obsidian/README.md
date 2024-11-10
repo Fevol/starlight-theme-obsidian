@@ -5,7 +5,7 @@
 ---
 
 <div align="center">
-<a href="https://github.com/Fevol/starlight-theme-obsidian/" style="text-decoration: none">
+<a href="https://www.npmjs.com/package/starlight-theme-obsidian/" style="text-decoration: none">
 <img alt="Starlight Obsidian Theme downloads - weekly" src="https://img.shields.io/npm/dw/starlight-theme-obsidian?label=Downloads:&logo=npm&color=CB3837&logoColor=CB3837">
 </a>
 <a href="https://github.com/Fevol/starlight-theme-obsidian/stargazers" style="text-decoration: none">
