@@ -34,6 +34,7 @@ export default defineConfig({
                         { label: 'Getting Started', link: '/getting-started/' },
                         { label: 'Contributing', link: '/contributing/' },
                         { label: 'Attribution', link: '/attribution/' },
+                        { label: 'Changelog', link: '/changelog/' },
                     ],
                 },
                 {

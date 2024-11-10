@@ -35,6 +35,8 @@
  <a href="https://fevol.github.io/starlight-theme-obsidian/">WEBSITE</a>
  <span>&nbsp;·&nbsp;</span>
  <a href="https://fevol.github.io/starlight-theme-obsidian/configuration/">CONFIGURATION</a>
+ <span>&nbsp;·&nbsp;</span>
+ <a href="https://fevol.github.io/starlight-theme-obsidian/changelog/">CHANGELOG</a>
 </h4>
 </div>
 
