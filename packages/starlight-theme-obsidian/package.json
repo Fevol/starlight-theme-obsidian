@@ -14,6 +14,7 @@
 		"./overrides/ThemeSelect.astro": "./overrides/ThemeSelect.astro",
 		"./overrides/MobileMenuFooter.astro": "./overrides/MobileMenuFooter.astro",
 		"./schema": "./schema.ts",
+		"./config": "./config.ts",
 		"./styles/common.css": "./styles/common.css"
 	},
 	"scripts": {},
