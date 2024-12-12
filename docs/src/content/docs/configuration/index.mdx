@@ -19,11 +19,11 @@ In general, you can configure the underlying Starlight Site Graph in several way
 		// astro.config.mjs
 		import starlight from '@astrojs/starlight'
 		import { defineConfig } from 'astro/config'
-			import starlightSiteGraph from 'starlight-site-graph'
+			import starlightThemeObsidian from 'starlight-theme-obsidian'
 				 export default defineConfig({
 					 integrations: [
 						starlight({
-							plugins: [starlightSiteGraph({
+							plugins: [starlightThemeObsidian({
 	+							debug: false, 			// See "General Settings"
 	+							sitemapCongig: {},  	// See "Sitemap Settings"
 	+							graphConfig: {},  		// See "Graph Settings"

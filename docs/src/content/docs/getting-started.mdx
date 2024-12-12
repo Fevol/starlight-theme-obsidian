@@ -65,3 +65,25 @@ import { PackageManagers } from 'starlight-package-managers'
 That's it! You should now see the Starlight Obsidian theme applied to your Starlight website.
 
 You can now further configure the theme and the graph component in the sidebar by following the [configuration](/starlight-theme-obsidian/configuration/graph/) guide.
+
+:::note
+If you want to _disable_ the graph and backlinks components which are added by default, you can do so by applying the following settings:
+```diff lang="js"
+// astro.config.mjs
+import starlight from '@astrojs/starlight'
+import { defineConfig } from 'astro/config'
+import starlightThemeObsidian from 'starlight-theme-obsidian'
+
+export default defineConfig({
+    integrations: [
+        starlight({
+            plugins: [starlightThemeObsidian({
++                   backlinks: false,
++                   graph: false
+            })],
+            title: 'My Docs',
+        }),
+    ],
+})
+```
+:::

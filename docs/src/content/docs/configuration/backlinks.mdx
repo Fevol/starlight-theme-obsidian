@@ -1,41 +1,36 @@
 ---
 title: Backlinks
-description: Learn how to configure the backlinks component in the sidebar.
+description: Learn how to configure the backlinks component.
 sidebar:
   order: 3
 sitemap:
   pageTitle: Backlinks Configuration
 ---
 
-This page provides information on how you can configure the backlinks component in the sidebar.
+This page provides information on how you can configure the backlinks component.
 
-## General configuration
+## Render
 
-To configure the backlinks component in the sidebar, refer to the [Starlight Site Graph backlinks configuration](https://fevol.github.io/starlight-site-graph/configuration/backlinks) for more information.
-
-## Examples
-
-Some common examples are provided below to showcase how you might configure the backlinks component in the sidebar.
-
-### Disable the backlinks on every page
+If you want to _disable_ the backlinks component, you can do so by setting `backlinks` to `false` in the plugin settings.
 
 ```diff lang="js"
-	// astro.config.mjs
-	import starlight from '@astrojs/starlight'
-	import { defineConfig } from 'astro/config'
-	import starlightThemeObsidian from 'starlight-theme-obsidian'
+    // astro.config.mjs
+    import starlight from '@astrojs/starlight'
+    import { defineConfig } from 'astro/config'
+    import starlightThemeObsidian from 'starlight-theme-obsidian'
 
-	export default defineConfig({
-		integrations: [
-			starlight({
-				plugins: [starlightThemeObsidian({
-+					backlinksConfig: {
-+						visibilityRules: []
-+					}
-				})],
-				title: 'My Docs',
-			}),
-		],
-	})
+    export default defineConfig({
+        integrations: [
+            starlight({
+                plugins: [starlightThemeObsidian({
++                  backlinks: false
+                })],
+                title: 'My Docs',
+            }),
+        ],
+    })
 ```
 
+## Component configuration
+
+For configuration of the backlinks component itself, check out the [Starlight Site Graph backlinks configuration](https://fevol.github.io/starlight-site-graph/configuration/backlinks).

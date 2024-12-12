@@ -1,22 +1,43 @@
 ---
 title: Graph
-description: Learn how to configure the graph component in the sidebar.
+description: Learn how to configure the graph component.
 sidebar:
   order: 2
 sitemap:
   pageTitle: Graph Configuration
 ---
 
-This page provides information on how you can configure the graph component in the sidebar.
+This page provides information on how you can configure the graph component.
 
-## General configuration
+## Render
 
-To configure the graph component in the sidebar, refer to the [Starlight Site Graph graph configuration](https://fevol.github.io/starlight-site-graph/configuration/graph) for more information.
+If you want to _disable_ the graph component, you can do so by setting `graph` to `false` in the plugin settings.
+
+```diff lang="js"
+    // astro.config.mjs
+    import starlight from '@astrojs/starlight'
+    import { defineConfig } from 'astro/config'
+    import starlightThemeObsidian from 'starlight-theme-obsidian'
+
+    export default defineConfig({
+        integrations: [
+            starlight({
+                plugins: [starlightThemeObsidian({
++                  graph: false
+                })],
+                title: 'My Docs',
+            }),
+        ],
+    })
+```
+
+## Component configuration
+
+For configuration of the graph component itself, check out the [Starlight Site Graph graph configuration](https://fevol.github.io/starlight-site-graph/configuration/graph).
 
 ## Examples
-Some common examples are provided below to showcase how you might configure the graph component in the sidebar.
 
-### Disable the graph on every page
+### Make the current node larger
 
 ```diff lang="js"
     // astro.config.mjs
@@ -29,7 +50,9 @@ Some common examples are provided below to showcase how you might configure the 
             starlight({
                 plugins: [starlightThemeObsidian({
 +                  graphConfig: {
-+                       visibilityRules: []
++                       nodeCurrentStyle: {
++                           shapeSize: 25
++                       }
 +                  }
                 })],
                 title: 'My Docs',
@@ -37,7 +60,6 @@ Some common examples are provided below to showcase how you might configure the 
         ],
     })
 ```
-
 
 ### Remove all quick actions from graph
 
