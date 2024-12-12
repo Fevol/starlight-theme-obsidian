@@ -1,3 +1,7 @@
+## [0.0.10](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.0.10) (2024/12/12)
+### Features
+- Simpler disabling of the graph and backlinks via the `graph` and `backlinks` settings
+
 ## [0.0.9](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.0.9) (2024/11/11)
 ### Fixes
 - Site sidebar not scrolling properly on Firefox
