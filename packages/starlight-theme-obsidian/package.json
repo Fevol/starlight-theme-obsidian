@@ -1,7 +1,7 @@
 {
 	"name": "starlight-theme-obsidian",
 	"author": "Fevol",
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"license": "MIT",
 	"description": "A Starlight theme inspired by the Obsidian Publish website theme",
 	"type": "module",
