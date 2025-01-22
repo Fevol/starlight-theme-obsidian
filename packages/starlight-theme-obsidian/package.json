@@ -34,8 +34,8 @@
 	},
 	"bugs": "https://github.com/Fevol/starlight-theme-obsidian/issues",
 	"peerDependencies": {
-		"@astrojs/starlight": "^0.30.3",
-		"astro": "^5.1.1",
+		"@astrojs/starlight": "^0.31.0",
+		"astro": "^5.1.5",
 		"starlight-site-graph": "^0.2.0"
 	}
 }
