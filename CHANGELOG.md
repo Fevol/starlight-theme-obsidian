@@ -1,4 +1,4 @@
-## [0.1.0](https://github.com/Fevol/starlight-site-graph/releases/tag/0.2.0) (2025/01/19)
+## [0.1.0](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.1.0) (2025/01/19)
 
 ### Upgrades
 
