@@ -28,7 +28,7 @@ export default function plugin(userConfig?: StarlightThemeObsidianConfig): Starl
 						'`starlight-site-graph` is already included in the `astro.config.mjs`. Skipping integration.',
 					);
 				} else {
-					await starlightSiteGraph(parsedConfig).hooks['config:setup'](args);
+					await starlightSiteGraph(parsedConfig).hooks['config:setup']?.(args);
 				}
 				const customCss: typeof config.customCss = [
 					'starlight-theme-obsidian/styles/common.css',
