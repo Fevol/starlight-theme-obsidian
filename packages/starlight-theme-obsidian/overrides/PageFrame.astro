@@ -5,7 +5,7 @@ import SiteTitle from 'virtual:starlight/components/SiteTitle';
 
 import type { Props } from '../props';
 
-const { hasSidebar } = Astro.props;
+const { hasSidebar } = Astro.locals.starlightRoute;
 ---
 
 {/* (STARLIGHT-THEME-OBSIDIAN): Do not show header component if page has no sidebar, create a separate mobile-header component */}

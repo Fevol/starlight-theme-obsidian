@@ -13,7 +13,7 @@
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",
-		"@astrojs/starlight": "0.31.1",
+		"@astrojs/starlight": "0.32.3",
 		"astro": "5.1.8",
 		"astro-og-canvas": "^0.5.4",
 		"starlight-links-validator": "^0.12.3",
