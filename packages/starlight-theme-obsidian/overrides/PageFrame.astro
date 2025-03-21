@@ -1,9 +1,7 @@
 ---
-import MobileMenuToggle from 'virtual:starlight/components/MobileMenuToggle';
-import MobileTableOfContents from 'virtual:starlight/components/MobileTableOfContents';
-import SiteTitle from 'virtual:starlight/components/SiteTitle';
-
-import type { Props } from '../props';
+import MobileTableOfContents from '@astrojs/starlight/components/MobileTableOfContents.astro';
+import MobileMenuToggle from '@astrojs/starlight/components/MobileMenuToggle.astro';
+import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
 
 const { hasSidebar } = Astro.locals.starlightRoute;
 ---
