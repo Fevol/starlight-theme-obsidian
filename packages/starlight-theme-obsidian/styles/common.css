@@ -305,7 +305,7 @@
 }
 
 /* Remove border of mobile preferences */
-.mobile-preferences {
+div.mobile-preferences.mobile-preferences {
     border-top: unset;
 }
 
@@ -370,7 +370,7 @@
 
 
 /* Remove border between page heading and content */
-.content-panel + .content-panel {
+div.content-panel.content-panel {
     border-top: unset;
 }
 
@@ -405,6 +405,13 @@ footer {
 /* Center content if no sidebars are present (e.g. banner splash) */
 .page:not(:has(>.sidebar)) {
     padding-left: unset;
+
+    div.header {
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--sl-content-width);
+    }
 
     .main-pane {
         margin-left: auto;

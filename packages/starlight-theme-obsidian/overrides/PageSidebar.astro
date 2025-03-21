@@ -1,31 +1,28 @@
 ---
 import TableOfContents from 'virtual:starlight/components/TableOfContents';
 
-import type { Props } from '@astrojs/starlight/props';
-
 import { PageGraph, PageBacklinks } from "starlight-site-graph/components";
-
 ---
 
 {/* (STARLIGHT-THEME-OBSIDIAN): Add page graph and backlink components */}
-<PageGraph {...Astro.props} class="right-sidebar-panel graph-panel">
+<PageGraph class="right-sidebar-panel graph-panel">
     <h2 slot="title">{Astro.locals.t('starlight-site-graph.graph')}</h2>
 </PageGraph>
 
 {
-    Astro.props.toc && (
+    Astro.locals.starlightRoute.toc && (
     <>
         <div class="right-sidebar-panel sl-hidden lg:sl-block">
             {/* (STARLIGHT-THEME-OBSIDIAN): Removed mobile ToC, moved to PageFrame */}
             <div class="sl-container">
-                <TableOfContents {...Astro.props} />
+                <TableOfContents/>
             </div>
         </div>
     </>
     )
 }
 
-<PageBacklinks {...Astro.props} class="right-sidebar-panel backlinks-panel">
+<PageBacklinks class="right-sidebar-panel backlinks-panel">
     <h2 slot="title">{Astro.locals.t('starlight-site-graph.backlinks')}</h2>
 </PageBacklinks>
 

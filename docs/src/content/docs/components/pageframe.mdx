@@ -26,13 +26,11 @@ Note that including the `<style>` tag is important, as none of the default style
 	1. Create your own `PageFrame.astro` component in the `src/overrides` directory (or `src/components` if you prefer).
 		```astro
 		---
-		import MobileMenuToggle from 'virtual:starlight/components/MobileMenuToggle';
-		import MobileTableOfContents from 'virtual:starlight/components/MobileTableOfContents';
-		import SiteTitle from 'virtual:starlight/components/SiteTitle';
+        import MobileTableOfContents from '@astrojs/starlight/components/MobileTableOfContents.astro';
+        import MobileMenuToggle from '@astrojs/starlight/components/MobileMenuToggle.astro';
+        import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
 
-		import type { Props } from '../props';
-
-		const { hasSidebar } = Astro.props;
+		const { hasSidebar } = Astro.locals.starlightRoute;
 		---
 
 		<div class="page sl-flex">
@@ -51,10 +49,10 @@ Note that including the `<style>` tag is important, as none of the default style
 				{hasSidebar && (
 					<div class="mobile-header">
 						<div class="title-wrapper ">
-							<SiteTitle {...Astro.props} />
+							<SiteTitle/>
 						</div>
-						<MobileTableOfContents {...Astro.props} />
-						<MobileMenuToggle {...Astro.props} />
+						<MobileTableOfContents/>
+						<MobileMenuToggle/>
 					</div>
 				)}
 				<slot />

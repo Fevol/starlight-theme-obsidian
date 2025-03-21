@@ -1,11 +1,9 @@
 ---
-import MobileMenuToggle from 'virtual:starlight/components/MobileMenuToggle';
-import MobileTableOfContents from 'virtual:starlight/components/MobileTableOfContents';
-import SiteTitle from 'virtual:starlight/components/SiteTitle';
+import MobileTableOfContents from '@astrojs/starlight/components/MobileTableOfContents.astro';
+import MobileMenuToggle from '@astrojs/starlight/components/MobileMenuToggle.astro';
+import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
 
-import type { Props } from '../props';
-
-const { hasSidebar } = Astro.props;
+const { hasSidebar } = Astro.locals.starlightRoute;
 ---
 
 {/* (STARLIGHT-THEME-OBSIDIAN): Do not show header component if page has no sidebar, create a separate mobile-header component */}
@@ -25,10 +23,10 @@ const { hasSidebar } = Astro.props;
         {hasSidebar && (
             <div class="mobile-header">
                 <div class="title-wrapper ">
-                    <SiteTitle {...Astro.props} />
+                    <SiteTitle/>
                 </div>
-                <MobileTableOfContents {...Astro.props} />
-                <MobileMenuToggle {...Astro.props} />
+                <MobileTableOfContents/>
+                <MobileMenuToggle/>
             </div>
         )}
         <slot />
