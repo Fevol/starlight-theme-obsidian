@@ -37,7 +37,14 @@ export default function plugin(userConfig?: StarlightThemeObsidianConfig): Starl
 
 				const componentOverrides: typeof config.components = {};
 
-				const overridableComponents = ['Sidebar', 'PageFrame', 'Pagination', 'ThemeSelect', 'PageSidebar'];
+				type OverridableComponent = 'Sidebar' | 'PageFrame' | 'Pagination' | 'ThemeSelect' | 'PageSidebar';
+				const overridableComponents: OverridableComponent[] = [
+					'Sidebar',
+					'PageFrame',
+					'Pagination',
+					'ThemeSelect',
+					'PageSidebar',
+				];
 				for (const component of overridableComponents) {
 					if (config.components?.[component]) {
 						logger.warn(
