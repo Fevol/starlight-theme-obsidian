@@ -1,5 +1,4 @@
 ---
-import type { Props } from '@astrojs/starlight/props';
 import Default from '@astrojs/starlight/components/Sidebar.astro';
 import Search from 'virtual:starlight/components/Search';
 import SiteTitle from 'virtual:starlight/components/SiteTitle';
@@ -13,12 +12,12 @@ const shouldRenderSearch = config.pagefind || config.components.Search !== '@ast
 {/* (STARLIGHT-THEME-OBSIDIAN): Reorder site sidebar to always contain site title */}
 <div class="sidebar-top">
     <div class="title-wrapper ">
-        <SiteTitle {...Astro.props} />
+        <SiteTitle/>
     </div>
 
-    {shouldRenderSearch && <Search {...Astro.props} />}
+    {shouldRenderSearch && <Search/>}
 
-    <MobileMenuFooter {...Astro.props} />
+    <MobileMenuFooter/>
 </div>
 
-<Default {...Astro.props}><slot /></Default>
+<Default><slot /></Default>

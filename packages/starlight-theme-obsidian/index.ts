@@ -4,9 +4,14 @@ import { type StarlightThemeObsidianConfig, validateConfig } from 'starlight-the
 
 export default function plugin(userConfig?: StarlightThemeObsidianConfig): StarlightPlugin {
 	const parsedConfig = validateConfig(userConfig);
+
+	let i18nArgs = null;
 	return {
 		name: 'starlight-theme-obsidian',
 		hooks: {
+			'i18n:setup': async args => {
+				i18nArgs = args;
+			},
 			'config:setup': async args => {
 				const { config, logger, updateConfig } = args;
 				// TODO: Temporary implementation of graph/backlinks exclusion from theme
@@ -28,7 +33,10 @@ export default function plugin(userConfig?: StarlightThemeObsidianConfig): Starl
 						'`starlight-site-graph` is already included in the `astro.config.mjs`. Skipping integration.',
 					);
 				} else {
-					await starlightSiteGraph(parsedConfig).hooks['config:setup']?.(args);
+					// TODO: This is dumb, bad, and I should really start work on that `addPlugin` PR...
+					const starlightPlugin = starlightSiteGraph(parsedConfig);
+					await starlightPlugin.hooks['i18n:setup']?.(i18nArgs);
+					await starlightPlugin.hooks['config:setup']?.(args);
 				}
 				const customCss: typeof config.customCss = [
 					'starlight-theme-obsidian/styles/common.css',

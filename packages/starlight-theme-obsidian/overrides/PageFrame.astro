@@ -23,10 +23,10 @@ const { hasSidebar } = Astro.locals.starlightRoute;
         {hasSidebar && (
             <div class="mobile-header">
                 <div class="title-wrapper ">
-                    <SiteTitle {...Astro.props} />
+                    <SiteTitle/>
                 </div>
-                <MobileTableOfContents {...Astro.props} />
-                <MobileMenuToggle {...Astro.props} />
+                <MobileTableOfContents/>
+                <MobileMenuToggle/>
             </div>
         )}
         <slot />

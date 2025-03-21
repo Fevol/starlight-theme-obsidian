@@ -25,7 +25,6 @@ If you want to extend the `<Sidebar>` component for your own website, you can do
 	1. Create your own `Sidebar.astro` component in the `src/overrides` directory (or `src/components` if you prefer).
 		```astro
 		---
-		import type { Props } from '@astrojs/starlight/props';
 		import Default from '@astrojs/starlight/components/Sidebar.astro';
 		import Search from 'virtual:starlight/components/Search';
 		import SiteTitle from 'virtual:starlight/components/SiteTitle';
@@ -38,15 +37,15 @@ If you want to extend the `<Sidebar>` component for your own website, you can do
 
 		<div class="sidebar-top">
 			<div class="title-wrapper ">
-				<SiteTitle {...Astro.props} />
+				<SiteTitle/>
 			</div>
 
-			{shouldRenderSearch && <Search {...Astro.props} />}
+			{shouldRenderSearch && <Search/>}
 
-			<MobileMenuFooter {...Astro.props} />
+			<MobileMenuFooter/>
 		</div>
 
-		<Default {...Astro.props}><slot /></Default>
+		<Default><slot /></Default>
 		```
 	2. Add the `Sidebar` override to your `astro.config.mjs` file.
 		```diff lang="js"
