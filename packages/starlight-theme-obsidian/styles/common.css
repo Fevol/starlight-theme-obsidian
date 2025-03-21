@@ -406,6 +406,13 @@ footer {
 .page:not(:has(>.sidebar)) {
     padding-left: unset;
 
+    div.header {
+        margin-left: auto;
+        margin-right: auto;
+
+        max-width: var(--sl-content-width);
+    }
+
     .main-pane {
         margin-left: auto;
         margin-right: auto;
