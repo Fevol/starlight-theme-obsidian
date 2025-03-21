@@ -1,3 +1,23 @@
+## [0.2.0](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.2.0) (2025/03/21)
+### Upgrades
+-   ⚠️ **Minor change:** The minimum supported version of Starlight is now `0.32.0`, and Astro `5.5.0`.<br>
+    No breaking changes are introduced in this upgrade, but it is recommended to update component overrides
+    snippets that were provided by this plugin: please remove the following lines:
+    ```diff
+    ---
+    -import type { Props } from '@astrojs/starlight/props';
+    import Default from "@astrojs/starlight/components/PageSidebar.astro";
+    ---
+    
+    -<Default {...Astro.props}><slot /></Default>
+    +<Default><slot /></Default>
+    ```
+
+### Fixes
+-   Center header for full-screen pages
+-   Slightly improve rendering for dark reader extension users
+-   All fixes from [`starlight-site-graph` version `0.3.0`](https://github.com/Fevol/starlight-site-graph/releases/tag/0.3.0)
+
 ## [0.1.1](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.1.1) (2025/01/23)
 ### Upgrades
 -   The minimum supported version of Starlight is now `0.31.0`, and Astro `5.1.5`.
