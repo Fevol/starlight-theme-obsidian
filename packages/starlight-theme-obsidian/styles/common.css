@@ -305,7 +305,7 @@
 }
 
 /* Remove border of mobile preferences */
-.mobile-preferences {
+div.mobile-preferences.mobile-preferences {
     border-top: unset;
 }
 
@@ -370,7 +370,7 @@
 
 
 /* Remove border between page heading and content */
-.content-panel + .content-panel {
+div.content-panel.content-panel {
     border-top: unset;
 }
 
