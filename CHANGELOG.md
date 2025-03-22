@@ -1,3 +1,7 @@
+## [0.2.1](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.2.1) (2025/03/22)
+### Fixes
+-   Improve overflow behaviour of social media icons in sidebar
+
 ## [0.2.0](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.2.0) (2025/03/21)
 ### Upgrades
 -   ⚠️ **Minor change:** The minimum supported version of Starlight is now `0.32.0`, and Astro `5.5.0`.<br>
