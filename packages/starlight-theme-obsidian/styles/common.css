@@ -434,6 +434,28 @@ footer {
     border-inline-end: unset;
 }
 
+.sidebar {
+    .mobile-preferences {
+        display: flex;
+        flex-wrap: nowrap;
+        column-gap: 0;
+    }
+
+    .social-icons {
+        flex: 1;
+        flex-wrap: wrap;
+    }
+
+    starlight-obsidian-theme-select {
+        flex: 0;
+        align-self: flex-start;
+
+        > button {
+            padding-left: 0;
+        }
+    }
+}
+
 .sidebar-content {
     div.md\:sl-hidden {
         display: none;
