@@ -1,3 +1,7 @@
+## [0.2.2](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.2.2) (2025/03/28)
+### Fixes
+-   Fix issue which may cause the `build` step to fail
+
 ## [0.2.1](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.2.1) (2025/03/22)
 ### Fixes
 -   Improve overflow behaviour of social media icons in sidebar
