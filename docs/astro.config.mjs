@@ -37,6 +37,10 @@ export default defineConfig({
                         { label: 'Changelog', link: '/changelog/' },
                     ],
                 },
+				{
+					label: 'Resources',
+					autogenerate: { directory: 'resources' },
+				},
                 {
                     label: 'Configuration',
                     autogenerate: { directory: 'configuration' },

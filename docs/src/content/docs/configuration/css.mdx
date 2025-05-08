@@ -7,13 +7,35 @@ sitemap:
   pageTitle: CSS Configuration
 ---
 
+[//]: # (This section is largely based on the one found in the Starlight Rapide theme, all credits go to HiDeoo!)
+
+## Cascade Layer Configuration
+Like Starlight, the Starlight Obsidian theme uses [cascade layers](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_layers)
+internally to manage the order of its styles.
+This ensures a predictable CSS order and allows for simpler overrides.
+Any custom unlayered CSS will override the default styles from the `starlight` and `obsidian` layers.
+
+If you are using cascade layers, you can use [`@layer`](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer)
+in your [custom CSS](https://starlight.astro.build/guides/css-and-tailwind/#custom-css-styles) to define
+the order of precedence for different layers, relative to the base Starlight and Starlight Obsidian theme styles:
+
+```css "starlight" "obsidian"
+/* src/styles/custom.css */
+@layer my-base, starlight, obsidian, my-overrides;
+```
+
+The example above defines a custom layer named `my-base`, applied before all the Starlight and Starlight Obsidian theme layers,
+and another named `my-overrides`, applied after all Starlight and Starlight Obsidian theme layers.
+Any styles in the `my-overrides` layer would take precedence over the Starlight and Starlight Obsidian theme styles,
+but Starlight or the Starlight Obsidian theme could still change styles set in the `my-base` layer.
+
 ## Variable configuration
 
 All of Starlight's [CSS variables](https://github.com/withastro/starlight/blob/main/packages/starlight/style/props.css)
-can be used to customize the theme to your liking.
+are still available and can be used to customize the theme to your liking.
 
-The only variable override made by the theme,
-is that the background color of the site (the `--sl-color-bg` variable) has been set to `#111213` and `#f8f9fa`
+The only major variable that has been overridden by the theme
+is the background color of the site (the `--sl-color-bg` variable), which has been set to `#111213` and `#f8f9fa`
 for the dark and light themes respectively.
 Additionally, the sidebar and navigation background color variables have been styled to match the page background.
 Other than that, the theme uses the default Starlight CSS variables for styling the content.

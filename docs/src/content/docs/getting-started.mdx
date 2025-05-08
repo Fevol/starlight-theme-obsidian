@@ -3,21 +3,23 @@ title: Getting Started
 description: Learn how to use the Starlight Obsidian theme in your Starlight site.
 ---
 
-A [Starlight](https://starlight.astro.build) theme inspired by the style of [Obsidian Publish](https://obsidian.md/publish) websites.
+The Starlight Obsidian Theme is a [Starlight](https://starlight.astro.build) theme inspired by the style of [Obsidian Publish](https://obsidian.md/publish) websites.
 This project is in no way affiliated with [Obsidian](https://obsidian.md/).
 
-Various [examples](/starlight-theme-obsidian/examples/asides/) are provided to showcase changes made by the theme.
+Various [examples](/starlight-theme-obsidian/examples/asides/) are provided to showcase how the theme will display content.
 
 ## Prerequisites
 
 You will need to have a Starlight website set up.
-If you don't have one yet, you can follow the ["Getting Started"](https://starlight.astro.build/getting-started) guide in the Starlight docs to create one.
+If you don't have one yet, follow the ["Getting Started"](https://starlight.astro.build/getting-started) guide from the official Starlight docs to create one.
 
 :::caution[Warning]
-This theme requires a [Starlight](https://starlight.astro.build) version of at least `^0.28.0` - due to the use of the i18next localization system
-in several components. An [Astro](https://astro.build) version equal or higher than `^4.14.0` is also required.
+The latest version of this theme requires a [Starlight](https://starlight.astro.build) version of at least `^0.33.0` (and Astro `^5.5.0`).
+Some older versions of Starlight are supported in previous releases of this theme, but they will not receive any new features or
+bug fixes.
 
-New features for this plugin will only be added to recent versions of Starlight/Astro, backwards compatibility is not guaranteed.
+New features for this plugin will only be added to recent versions of Starlight/Astro, backwards compatibility is not guaranteed,
+and in many cases, this will break due to breaking changes in the downstream packages.
 Refer to the [CHANGELOG](/starlight-theme-obsidian/changelog) for more information about specific changes.
 :::
 
@@ -28,7 +30,7 @@ import { PackageManagers } from 'starlight-package-managers'
 
 <Steps>
     1. The Starlight Obsidian theme is a Starlight [plugin](https://starlight.astro.build/reference/plugins/) that you can install using your favorite package manager:
-        <PackageManagers pkg="starlight-theme-obsidian" />
+        <PackageManagers pkg="starlight-theme-obsidian" pkgManagers={["npm", "pnpm", "yarn", "bun"]} type="add"/>
     2. Configure the plugin in your Starlight [configuration](https://starlight.astro.build/reference/configuration/#plugins) in the `astro.config.mjs` file.
         ```diff lang="js"
             // astro.config.mjs
