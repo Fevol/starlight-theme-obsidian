@@ -1,3 +1,10 @@
+## [0.3.0](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.3.0) (2025/05/09)
+### Upgrades
+-   The minimum supported version of Starlight is now `0.33.0` due to a change in the social link syntax and support for CSS cascade layers.
+    - The theme now exists on the `obsidian` layer, added after the base `starlight` layer. 
+    - Styles added by this theme can now be more easily overridden with custom CSS.
+
+
 ## [0.2.2](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.2.2) (2025/03/28)
 ### Fixes
 -   Fix issue which may cause the `build` step to fail
