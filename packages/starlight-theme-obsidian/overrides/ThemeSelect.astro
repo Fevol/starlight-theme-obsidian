@@ -39,103 +39,105 @@ const id = `moon-mask-${crypto.randomBytes(4).toString('hex')}`;
 </starlight-obsidian-theme-select>
 
 <style>
-    starlight-obsidian-theme-select {
-        --sl-obsidian-theme-select-animation-duration: 400ms;
-        --sl-obsidian-theme-select-ease-elastic: cubic-bezier(0.5, 1.25, 0.75, 1.25);
+	@layer obsidian {
+		starlight-obsidian-theme-select {
+			--sl-obsidian-theme-select-animation-duration: 400ms;
+			--sl-obsidian-theme-select-ease-elastic: cubic-bezier(0.5, 1.25, 0.75, 1.25);
 
-        align-self: stretch;
-    }
+			align-self: stretch;
+		}
 
-    button {
-        align-items: center;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        height: 100%;
-        margin-inline: 0.5rem 0.5rem;
-        padding-inline: 0.75rem;
-    }
+		button {
+			align-items: center;
+			background-color: transparent;
+			border: none;
+			cursor: pointer;
+			height: 100%;
+			margin-inline: 0.5rem 0.5rem;
+			padding-inline: 0.75rem;
+		}
 
-    svg {
-        stroke-linecap: round;
-    }
+		svg {
+			stroke-linecap: round;
+		}
 
-    svg :is(.moon, .sun, .sun-beams) {
-        transform-origin: center;
-    }
+		svg :is(.moon, .sun, .sun-beams) {
+			transform-origin: center;
+		}
 
-    svg :is(.moon, .sun) {
-        fill: var(--sl-color-gray-2);
-    }
+		svg :is(.moon, .sun) {
+			fill: var(--sl-color-gray-2);
+		}
 
-    svg .sun-beams {
-        stroke: var(--sl-color-gray-2);
-        stroke-width: 2px;
-    }
+		svg .sun-beams {
+			stroke: var(--sl-color-gray-2);
+			stroke-width: 2px;
+		}
 
-    button:is(:hover, :focus-visible) svg :is(.moon, .sun) {
-        fill: var(--sl-color-accent-high);
-    }
+		button:is(:hover, :focus-visible) svg :is(.moon, .sun) {
+			fill: var(--sl-color-accent-high);
+		}
 
-    button:is(:hover, :focus-visible) svg .sun-beams {
-        stroke: var(--sl-color-accent-high);
-    }
+		button:is(:hover, :focus-visible) svg .sun-beams {
+			stroke: var(--sl-color-accent-high);
+		}
 
-    :global([data-theme='dark']) svg .sun {
-        transform: scale(1.75);
-    }
+		:global([data-theme='dark']) svg .sun {
+			transform: scale(1.75);
+		}
 
-    :global([data-theme='dark']) svg .sun-beams {
-        opacity: 0;
-    }
+		:global([data-theme='dark']) svg .sun-beams {
+			opacity: 0;
+		}
 
-    :global([data-theme='dark']) svg .moon circle {
-        transform: translateX(-7px);
-    }
+		:global([data-theme='dark']) svg .moon circle {
+			transform: translateX(-7px);
+		}
 
-    @supports (cx: 1) {
-        :global([data-theme='dark']) svg .moon circle {
-            cx: 17;
-            transform: translateX(0);
-        }
-    }
+		@supports (cx: 1) {
+			:global([data-theme='dark']) svg .moon circle {
+				cx: 17;
+				transform: translateX(0);
+			}
+		}
 
-    @media (prefers-reduced-motion: no-preference) {
-        svg .sun {
-            transition: transform var(--sl-obsidian-theme-select-animation-duration) var(--sl-obsidian-theme-select-ease-elastic);
-        }
+		@media (prefers-reduced-motion: no-preference) {
+			svg .sun {
+				transition: transform var(--sl-obsidian-theme-select-animation-duration) var(--sl-obsidian-theme-select-ease-elastic);
+			}
 
-        svg .sun-beams {
-            transition: opacity var(--sl-obsidian-theme-select-animation-duration) ease,
-            transform var(--sl-obsidian-theme-select-animation-duration) var(--sl-obsidian-theme-select-ease-elastic);
-        }
+			svg .sun-beams {
+				transition: opacity var(--sl-obsidian-theme-select-animation-duration) ease,
+				transform var(--sl-obsidian-theme-select-animation-duration) var(--sl-obsidian-theme-select-ease-elastic);
+			}
 
-        svg .moon circle {
-            transition: transform calc(var(--sl-obsidian-theme-select-animation-duration) / 2) ease-out;
-        }
+			svg .moon circle {
+				transition: transform calc(var(--sl-obsidian-theme-select-animation-duration) / 2) ease-out;
+			}
 
-        @supports (cx: 1) {
-            svg .moon circle {
-                transition: cx calc(var(--sl-obsidian-theme-select-animation-duration) / 2) ease-out;
-            }
-        }
+			@supports (cx: 1) {
+				svg .moon circle {
+					transition: cx calc(var(--sl-obsidian-theme-select-animation-duration) / 2) ease-out;
+				}
+			}
 
-        :global([data-theme='dark']) svg .sun {
-            transform: scale(1.75);
-            transition-duration: calc(var(--sl-obsidian-theme-select-animation-duration) / 2);
-            transition-timing-function: ease;
-        }
+			:global([data-theme='dark']) svg .sun {
+				transform: scale(1.75);
+				transition-duration: calc(var(--sl-obsidian-theme-select-animation-duration) / 2);
+				transition-timing-function: ease;
+			}
 
-        :global([data-theme='dark']) svg .sun-beams {
-            transform: rotateZ(-25deg);
-            transition-duration: calc(var(--sl-obsidian-theme-select-animation-duration) / 4);
-        }
+			:global([data-theme='dark']) svg .sun-beams {
+				transform: rotateZ(-25deg);
+				transition-duration: calc(var(--sl-obsidian-theme-select-animation-duration) / 4);
+			}
 
-        :global([data-theme='dark']) svg .moon circle {
-            transition-delay: calc(var(--sl-obsidian-theme-select-animation-duration) / 4);
-            transition-duration: var(--sl-obsidian-theme-select-animation-duration);
-        }
-    }
+			:global([data-theme='dark']) svg .moon circle {
+				transition-delay: calc(var(--sl-obsidian-theme-select-animation-duration) / 4);
+				transition-duration: var(--sl-obsidian-theme-select-animation-duration);
+			}
+		}
+	}
 </style>
 
 {/* Inlined to avoid FOUC. Uses global scope from `ThemeProvider.astro` */}

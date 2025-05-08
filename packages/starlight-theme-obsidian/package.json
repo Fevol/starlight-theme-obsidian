@@ -15,6 +15,9 @@
 		"./overrides/MobileMenuFooter.astro": "./overrides/MobileMenuFooter.astro",
 		"./schema": "./schema.ts",
 		"./config": "./config.ts",
+		"./styles/layers.css": "./styles/layers.css",
+		"./styles/theme.css": "./styles/theme.css",
+		"./styles/centered-reading.css": "./styles/centered-reading.css",
 		"./styles/common.css": "./styles/common.css"
 	},
 	"scripts": {},
@@ -34,8 +37,8 @@
 	},
 	"bugs": "https://github.com/Fevol/starlight-theme-obsidian/issues",
 	"peerDependencies": {
-		"@astrojs/starlight": "^0.32.3",
+		"@astrojs/starlight": "^0.33.0",
 		"astro": "^5.5.3",
-		"starlight-site-graph": "^0.3.0"
+		"starlight-site-graph": "^0.3.1"
 	}
 }

@@ -1,772 +1,421 @@
-/* ------- Obsidian-inspired styles and colors ------- */
-:root:root {
-    --sl-color-bg-nav: var(--sl-color-bg);
-    --sl-color-bg-sidebar: var(--sl-color-bg);
-
-    --sl-border-radius-sm: 4px;
-    --sl-border-radius-md: 8px;
-    --sl-border-radius-lg: 12px;
-}
-
-:root[data-theme='dark'] {
-    --sl-color-bg: #111213;
-}
-
-:root[data-theme='light'] {
-    --sl-color-bg: #f8f9fa;
-    --slsg-graph-bg-color: var(--sl-color-black);
-}
-
-/* --------------------------------------------------- */
-
-/* ------------- Centered reading changes ------------ */
-
-/* When only left-sidebar or both sidebars are visible */
-@media (min-width: 50em) {
-    /* Align sidebar and content next to each other, make scrollable, add padding for centered reading */
-    .page {
-        flex-direction: row;
-        height: 100vh;
-        overflow-y: scroll;
-        /* This expression can become negative (has no effect) */
-        padding-left: calc((100vw - var(--sl-content-width) - 2 * var(--sl-sidebar-width)) / 2);
+@layer obsidian {
+    /* Remove border of mobile preferences */
+    div.mobile-preferences.mobile-preferences {
+        border-top: unset;
     }
 
-    /* Make sidebar sticky w.r.t scrolled content  */
+    a.sl-anchor-link {
+        color: var(--sl-color-gray-3);
+    }
+
+
+    /* Remove border between page heading and content */
+    div.content-panel.content-panel {
+        border-top: unset;
+    }
+
+    /* Remove border between content and right sidebar */
+    .right-sidebar {
+        border-inline-start: unset;
+    }
+
+    /* Add border to footer */
+    footer {
+        border-top: 1px solid var(--sl-color-hairline);
+        padding-top: 1rem;
+
+        .meta {
+            margin-top: unset;
+        }
+    }
+
+    /* --------------------------------------------------- */
+    /* ------------- Site sidebar styling ---------------- */
+    /* Align site actions and links in row */
+    .social-icons {
+        display: flex;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+
+    .social-icons::after {
+        border-inline-end: unset;
+    }
+
     .sidebar {
-        position: sticky;
-        top: 0;
-        align-self: flex-start;
-        z-index: 1;
-        height: inherit;
-
-        /* Ensure that the sidebar is either this size or smaller */
-        max-width: var(--sl-sidebar-width);
-    }
-
-    .mobile-header {
-        .title-wrapper {
-            display: none;
+        .mobile-preferences {
+            display: flex;
+            flex-wrap: nowrap;
+            column-gap: 0;
         }
-    }
-}
 
-/* When both sidebars are visible */
-@media (min-width: 72em) {
-    /* Do not offset any element when navigation has no height */
-    :root:not(:has(header)) {
-        --sl-nav-height: 0;
-    }
-
-    /* Fully hide the mobile header */
-    .mobile-header {
-        display: none;
-        visibility: hidden;
-    }
-
-    /* Make right sidebar sticky w.r.t scrolled content  */
-    .right-sidebar-container {
-        position: sticky;
-        top: 0;
-        align-self: flex-start;
-        z-index: 1;
-        height: inherit;
-
-        /* Ensure that the sidebar is either this size or smaller */
-        max-width: var(--sl-sidebar-width);
-    }
-
-    /* FIXME: This is very, very, very bad.
-        Some background:
-            The .right-sidebar-container is a sticky element, so it has its own stacking context.
-            That means that the blur filter applied by the .background-blur element within the graph-component
-               is _not_ applied to the .sidebar (left sidebar) due to it being in a different stacking context;
-               regardless of what the z-index of the .sidebar is.
-        So there are four solutions:
-            1. Just keep it as is and reason that the left sidebar should always be drawn on top (nope, bad).
-            2. Rework the right sidebar so it is an absolutely positioned element so that the usage of sticky can be avoided
-                (a lot of work, also requires a lot of finagling with the page and right sidebar widths and offsets
-                 to make the sizing and positioning work properly).
-              (Solution that will need to be implemented eventually)
-            3. Keep all the code as is and make the right sidebar positioned normally (no sticky)
-                 -> This is an undesirable solution: when the user has scrolled down, the sidebar will completely disappear when fullscreen is toggled
-            4. Keep all the code as is and only make the right sidebar positioned fixed when the background blur is applied
-               Then, approximate the width and relative position of the sidebar based on the current available space.
-        Currently, I opted for the fourth solution, but it does have the issue that when the sidebar is slightly folded,
-           everything is off by a bit, and there will be a visible jump when toggling fullscreen (happens between 1151px and 1300px)
-        Anyways, good luck to future me when you eventually get around to fixing this issue, xxx
-    */
-    body:has(.background-blur) {
-        .right-sidebar-container {
-            --right-sidebar-width: clamp(var(--sl-sidebar-width) / 2, calc(100vw - var(--sl-content-width) - var(--sl-sidebar-width)), var(--sl-sidebar-width));
-            background-color: var(--sl-color-bg-sidebar);
-
-            position: fixed;
-            right: calc(50vw - var(--right-sidebar-width) - var(--sl-content-width) / 2);
-            width: var(--right-sidebar-width);
+        .social-icons {
+            flex: 1;
+            flex-wrap: wrap;
         }
-    }
-}
 
-/* When screen becomes too narrow to neatly contain both title and mobile-toc */
-@media (max-width: 23em) {
-    /* 'Move' title from mobile header to sidebar */
-    .mobile-header {
-        .title-wrapper {
-            display: none;
-        }
-    }
+        starlight-obsidian-theme-select {
+            flex: 0;
+            align-self: flex-start;
 
-    .sidebar-pane.sidebar-pane.sidebar-pane {
-        .title-wrapper {
-            display: block;
-        }
-    }
-}
-
-/* When neither of the sidebars is visible */
-@media (max-width: 50em) {
-    /* Show mobile header with specified height, with hairline */
-    .mobile-header {
-        max-width: unset;
-        border-bottom: 1px solid var(--sl-color-hairline);
-
-        mobile-starlight-toc {
-            .dropdown {
-                top: calc(var(--sl-nav-height) + 1px);
-                left: 0;
+            > button {
+                padding-left: 0;
             }
         }
     }
 
-    /* Style site search in folded sidebar similar to regular style  */
-    .sidebar site-search {
-        button[data-open-modal] {
-            border: 1px solid var(--sl-color-gray-5);
-            border-radius: 0.5rem;
-            padding-inline-start: 0.75rem;
-            padding-inline-end: 0.5rem;
-            background-color: var(--sl-color-black);
-            color: var(--sl-color-gray-2);
-            font-size: var(--sl-text-sm);
-            width: 100%;
-        }
-
-        button[data-open-modal]:hover {
-            border-color: var(--sl-color-gray-2);
-            color: var(--sl-color-white)
-        }
-
-        button[data-open-modal] > :last-child {
-            margin-inline-start: auto
-        }
-
-        :is(button, .inc-spec) span {
-            display: block;
-        }
-    }
-
-
-    /* Hide site sidebar on left, make it take up the entire screen (below mobile ToC), animate reveal */
-    .sidebar-pane.sidebar-pane {
-        position: fixed;
-        width: 100%;
-        height: calc(100vh - var(--sl-nav-height));
-        z-index: 2;
-
-        visibility: unset;
-        transition: transform 0.2s ease-in-out;
-        transform: translateX(-100%);
-        background-color: var(--sl-color-bg);
-
-        .title-wrapper {
+    .sidebar-content {
+        div.md\:sl-hidden {
             display: none;
         }
     }
 
-    /* When mobile menu button is pressed, reveal the site sidebar */
-    body[data-mobile-menu-expanded] .sidebar-pane {
-        transform: translateX(0);
-    }
-}
+    /* --------------------------------------------------- */
+    /* ------------- General Content Styling ------------- */
+    .sl-markdown-content {
+        /* Add margin around horizontal lines */
 
-/* When neither or only the left sidebar is visible */
-@media (max-width: 72em) {
-    /* Do not add padding to main-frame, such that mobile-header is on top */
-    .main-frame {
-        padding-top: unset;
-    }
-
-    /* Make flex folded right-sidebar (see site-graph css) take up full width of the page */
-    .right-sidebar-container {
-        width: 100%;
-    }
-
-    /* Allow page to fill entire width when there is no right-sidebar */
-    .page .main-pane.main-pane.main-pane {
-        max-width: unset;
-
-        .sl-container {
-            max-width: unset;
-        }
-    }
-}
-
-/* Show mobile header at the top of the page as a replacement container for the mobile-toc/button */
-.mobile-header {
-    position: fixed;
-    width: 100%;
-    height: var(--sl-nav-height);
-    z-index: 5;
-    background-color: var(--sl-color-bg-nav);
-
-    padding: 0 1rem;
-
-    display: flex;
-    align-items: center;
-
-    /* Determines the speed at which the title becomes smaller when overflowing */
-
-    .title-wrapper {
-        flex-shrink: 1;
-
-        span {
-            font-size: clamp(0.2rem, 3vmin, var(--sl-text-h4));
-        }
-    }
-
-    /* Restyle the menu button to not be contained within a circle */
-
-    starlight-menu-button {
-        flex-shrink: 0;
-        margin-left: auto;
-
-        :is(.inc-spec, button) {
-            scale: 1.5;
-            position: unset;
-            display: flex;
-
-            height: fit-content;
-            width: fit-content;
-            padding: unset;
-
-            color: var(--sl-color-gray-5);
-            background: unset;
-            box-shadow: unset;
+        :is(.inc-spec, hr) {
+            margin: 2rem 0 0 0;
         }
 
-        &[aria-expanded="true"] :is(.inc-spec, button) {
-            background-color: unset;
+        /* Use accent color for hovering over link elements */
+
+        a:hover:not(:where(.not-content *)) {
             color: var(--sl-color-accent);
         }
     }
 
-
-    /* Change the styling of the mobile starlight ToC */
-
-    mobile-starlight-toc {
-        flex-shrink: 0;
-
-        nav {
-            /* Draw mobile ToC on top, align on left side with site sidebar */
-            position: unset;
-            border-top: unset;
-
-            /* Remove hairline border on bottom of "On this page" element (moved to mobile-header) */
-
-            summary {
-                border-bottom: unset;
-                padding: 0 0.5rem
-            }
-
-            /* Fix "On this page" dropdown first element not having a top border, make it absolutely positioned */
-
-            .dropdown {
-                position: fixed;
-                width: 100%;
-                border-top-color: var(--sl-color-hairline);
-            }
-
-            /* Add hover background */
-
-            .dropdown a:hover {
-                background-color: var(--sl-color-bg-nav);
-                color: var(--sl-color-accent-high);
-            }
-        }
-    }
-}
-
-/* Fixes screen reader elements being positioned outside of page in some browsers (Chrome),
-    causing unexpected vertical overflow of the body
-*/
-.sr-only {
-    position: relative;
-}
-
-/* Remove border of mobile preferences */
-div.mobile-preferences.mobile-preferences {
-    border-top: unset;
-}
-
-/* Make sidebar only take up viewport height, remove top padding for better scroll behaviour */
-.sidebar-content {
-    height: inherit;
-    padding-top: unset;
-}
-
-/* Make sidebar scrollable (with persistence) */
-/* @note: if scrollable property is placed lower in the hierarchy, persistence will not function */
-.sidebar-pane {
-    height: inherit;
-    border-inline-end: unset;
-}
-
-/* FIXME: Inconsistent scrolling behaviour between FireFox and Chrome,
-    Current situation: .sidebar-pane { overflow-y: scroll; }\
-        In Firefox, position sticky does not work
-    When changing this to .sidebar-content { overflow-y: scroll; }, it does not work in Chrome (unscrollable)
-    So solution is to use @supports to apply different rules based on browser
-*/
-@supports not(-moz-appearance:none) {
-    .sidebar-pane {
-        overflow-y: scroll;
-    }
-}
-
-@supports(-moz-appearance:none) {
-    .sidebar-content {
-        overflow-y: scroll;
-        scrollbar-width: thin;
-        scrollbar-gutter: stable;
-    }
-}
-
-
-
-/* Make sidebar positioned within content (instead of absolute) */
-.sidebar-pane, .right-sidebar {
-    position: unset;
-}
-
-/* Make sidebar information and buttons sticky */
-.sidebar-top {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background-color: var(--sl-color-bg-nav);
-
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    padding-top: 1em;
-}
-
-/* Reorder page such that content and sidebar are adjacent to each other */
-.page {
-    overflow: clip;
-    scrollbar-gutter: stable;
-}
-
-
-/* Remove border between page heading and content */
-div.content-panel.content-panel {
-    border-top: unset;
-}
-
-/* Remove border between content and right sidebar */
-.right-sidebar {
-    border-inline-start: unset;
-}
-
-/* Add border to footer */
-footer {
-    border-top: 1px solid var(--sl-color-hairline);
-    padding-top: 1rem;
-
-    .meta {
-        margin-top: unset;
-    }
-}
-
-/* Limit the width for centered reading */
-.main-frame {
-    padding-inline-start: unset;
-    overflow-y: scroll;
-    width: 100%;
-}
-
-.main-pane {
-    flex: 1;
-    margin-top: var(--sl-nav-height);
-    max-width: var(--sl-content-width);
-}
-
-/* Center content if no sidebars are present (e.g. banner splash) */
-.page:not(:has(>.sidebar)) {
-    padding-left: unset;
-
-    div.header {
-        margin-left: auto;
-        margin-right: auto;
-
-        max-width: var(--sl-content-width);
+    /* Steps line styling (Adapted from @HiDeoo/starlight-theme-rapide) */
+    .sl-steps > li:last-of-type:after {
+        background: linear-gradient(to bottom, var(--sl-color-hairline-light), var(--sl-color-bg) 85%);
     }
 
-    .main-pane {
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
+    /* --------------------------------------------------- */
 
-/* --------------------------------------------------- */
-
-
-/* ------------- Site sidebar styling ---------------- */
-/* Align site actions and links in row */
-.social-icons {
-    display: flex;
-    gap: 1rem;
-    padding: 0 1rem;
-}
-
-.social-icons::after {
-    border-inline-end: unset;
-}
-
-.sidebar {
-    .mobile-preferences {
-        display: flex;
-        flex-wrap: nowrap;
-        column-gap: 0;
-    }
-
-    .social-icons {
-        flex: 1;
-        flex-wrap: wrap;
-    }
-
-    starlight-obsidian-theme-select {
-        flex: 0;
-        align-self: flex-start;
-
-        > button {
-            padding-left: 0;
-        }
-    }
-}
-
-.sidebar-content {
-    div.md\:sl-hidden {
-        display: none;
-    }
-}
-
-/* --------------------------------------------------- */
-
-
-/* ------------- General Content Styling ------------- */
-.sl-markdown-content {
-    /* Add margin around horizontal lines */
-
-    :is(.inc-spec, hr) {
-        margin: 2rem 0 0 0;
-    }
-
-    /* Use accent color for hovering over link elements */
-
-    a:hover:not(:where(.not-content *)) {
-        color: var(--sl-color-accent);
-    }
-}
-
-/* Steps line styling (Adapted from @HiDeoo/starlight-theme-rapide) */
-.sl-steps > li:last-of-type:after {
-    background: linear-gradient(to bottom, var(--sl-color-hairline-light), var(--sl-color-bg) 85%);
-}
-
-/* --------------------------------------------------- */
-
-
-/* -------- Obsidian-inspired Callout Styling -------- */
-.starlight-aside {
-    border-radius: var(--sl-border-radius-md);
-    border: unset;
-}
-
-/* --------------------------------------------------- */
-
-
-/* ------------------ Badge Styling ----------------- */
-.sl-badge.sl-badge {
-    border-radius: var(--sl-border-radius-sm);
-    border: unset;
-}
-
-/* Impossible to disable variable override, so it needs to be specified each time */
-.sidebar-content a[aria-current="page"] > .sl-badge.sl-badge {
-    color: var(--sl-color-text-badge);
-    background-color: var(--sl-color-bg-badge);
-
-    &.default {
-        --sl-color-bg-badge: var(--sl-badge-default-bg);
-    }
-
-    &.note {
-        --sl-color-bg-badge: var(--sl-badge-note-bg);
-    }
-
-    &.danger {
-        --sl-color-bg-badge: var(--sl-badge-danger-bg);
-    }
-
-    &.success {
-        --sl-color-bg-badge: var(--sl-badge-success-bg);
-    }
-
-    &.tip {
-        --sl-color-bg-badge: var(--sl-badge-tip-bg);
-    }
-
-    &.caution {
-        --sl-color-bg-badge: var(--sl-badge-caution-bg);
-    }
-}
-
-/* --------------------------------------------------- */
-
-/* ----- Starlight components background styling ----- */
-starlight-file-tree {
-    background-color: var(--sl-color-black);
-    border: unset;
-    border-radius: var(--sl-border-radius-md);
-}
-
-.card {
-    border-radius: var(--sl-border-radius-md);
-    border-color: var(--sl-color-hairline);
-}
-
-.card .icon {
-    border: unset;
-}
-
-.sl-banner {
-    padding: 1rem;
-    margin: 1rem 1rem 0rem 1rem;
-    border-radius: var(--sl-border-radius-lg);
-}
-
-/* --------------------------------------------------- */
-
-
-/* ---------------- Draft styling -------------------- */
-.content-panel .sl-container > h1 + p.sl-flex {
-    border: unset;
-    border-radius: var(--sl-border-radius-md);
-    margin: 0.5rem auto 0 auto;
-}
-
-/* --------------------------------------------------- */
-
-
-/* ------------ Expressive Code styling ------------- */
-.sl-markdown-content {
-    .expressive-code.expressive-code pre {
-        --code-background: var(--sl-color-black);
-        border: unset;
-        border-radius: var(--sl-border-radius-sm);
-    }
-
-    code {
-        border-radius: var(--sl-border-radius-sm);
-    }
-
-    .expressive-code .ec-line mark::before, .expressive-code .ec-line ins::before, .expressive-code .ec-line del::before {
+    /* -------- Obsidian-inspired Callout Styling -------- */
+    .starlight-aside {
+        border-radius: var(--sl-border-radius-md);
         border: unset;
     }
 
-    .expressive-code .ec-line .code {
-        border-inline-start: unset;
+    /* --------------------------------------------------- */
+
+    /* ------------------ Badge Styling ------------------ */
+    .sl-badge.sl-badge {
+        border-radius: var(--sl-border-radius-sm);
+        border: unset;
     }
 
-    .expressive-code .frame {
+    /* Impossible to disable variable override, so it needs to be specified each time */
+    .sidebar-content a[aria-current="page"] > .sl-badge.sl-badge {
+        color: var(--sl-color-text-badge);
+        background-color: var(--sl-color-bg-badge);
+
+        &.default {
+            --sl-color-bg-badge: var(--sl-badge-default-bg);
+        }
+
+        &.note {
+            --sl-color-bg-badge: var(--sl-badge-note-bg);
+        }
+
+        &.danger {
+            --sl-color-bg-badge: var(--sl-badge-danger-bg);
+        }
+
+        &.success {
+            --sl-color-bg-badge: var(--sl-badge-success-bg);
+        }
+
+        &.tip {
+            --sl-color-bg-badge: var(--sl-badge-tip-bg);
+        }
+
+        &.caution {
+            --sl-color-bg-badge: var(--sl-badge-caution-bg);
+        }
+    }
+    /* --------------------------------------------------- */
+
+
+    /* ----- Starlight components background styling ----- */
+    starlight-file-tree {
+        background-color: var(--sl-color-black);
         border: unset;
         border-radius: var(--sl-border-radius-md);
+    }
 
-        &.is-terminal, &.has-title {
-            outline: 1px solid var(--sl-color-hairline);
-        }
+    .card {
+        border-radius: var(--sl-border-radius-md);
+        border-color: var(--sl-color-hairline);
+    }
 
-        & > .header.header.header {
+    .card .icon {
+        border: unset;
+    }
+
+    .sl-banner {
+        padding: 1rem;
+        margin: 1rem 1rem 0rem 1rem;
+        border-radius: var(--sl-border-radius-lg);
+    }
+    /* --------------------------------------------------- */
+
+    /* ---------------- Draft styling -------------------- */
+    .content-panel .sl-container > h1 + p.sl-flex {
+        border: unset;
+        border-radius: var(--sl-border-radius-md);
+        margin: 0.5rem auto 0 auto;
+    }
+    /* --------------------------------------------------- */
+
+    /* ------------ Expressive Code styling -------------- */
+    .sl-markdown-content {
+        .expressive-code.expressive-code pre {
+            --code-background: var(--sl-color-black);
             border: unset;
-            border-bottom: 1px solid var(--sl-color-hairline);
-            border-radius: var(--sl-border-radius-md) var(--sl-border-radius-md) 0 0;
-            background: var(--sl-color-black);
-
-            &::after {
-                content: unset;
-            }
+            border-radius: var(--sl-border-radius-sm);
         }
 
-        &:not(.is-terminal) {
-            .header {
-                &&::before {
-                    content: "";
-                    border: unset;
+        code {
+            border-radius: var(--sl-border-radius-sm);
+        }
+
+        .expressive-code .ec-line mark::before, .expressive-code .ec-line ins::before, .expressive-code .ec-line del::before {
+            border: unset;
+        }
+
+        .expressive-code .ec-line .code {
+            border-inline-start: unset;
+        }
+
+        .expressive-code .frame {
+            border: unset;
+            border-radius: var(--sl-border-radius-md);
+
+            &.is-terminal, &.has-title {
+                outline: 1px solid var(--sl-color-hairline);
+            }
+
+            & > .header.header.header {
+                border: unset;
+                border-bottom: 1px solid var(--sl-color-hairline);
+                border-radius: var(--sl-border-radius-md) var(--sl-border-radius-md) 0 0;
+                background: var(--sl-color-black);
+
+                &::after {
+                    content: unset;
                 }
+            }
 
-                .title {
-                    margin: -1px 0 0 -1px;
-
-                    &:first-child {
-                        border-radius: var(--sl-border-radius-md) 0 0 0;
+            &:not(.is-terminal) {
+                .header {
+                    &&::before {
+                        content: "";
+                        border: unset;
                     }
 
-                    &::after {
-                        border-top: unset;
-                        border-bottom: 2px solid var(--sl-color-accent);
+                    .title {
+                        margin: -1px 0 0 -1px;
+
+                        &:first-child {
+                            border-radius: var(--sl-border-radius-md) 0 0 0;
+                        }
+
+                        &::after {
+                            border-top: unset;
+                            border-bottom: 2px solid var(--sl-color-accent);
+                        }
                     }
                 }
             }
+
+            pre {
+                border-color: var(--sl-color-hairline);
+            }
+        }
+    }
+    /* --------------------------------------------------- */
+
+    /* ---- Style details to add left rounded border ----- */
+    .sl-markdown-content {
+        details {
+            position: relative;
+            border-inline-start: unset;
         }
 
-        pre {
-            border-color: var(--sl-color-hairline);
+        details::before {
+            content: '';
+            display: inline-block;
+            background: var(--sl-details-border-color);
+            width: 5px;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border-radius: 140px;
+            position: absolute;
+        }
+
+        details:hover {
+            --sl-details-border-color: var(--sl-details-border-color--hover);
         }
     }
-}
+    /* --------------------------------------------------- */
 
-/* --------------------------------------------------- */
+    /* --------------- Link Button Styling --------------- */
+    .sl-link-button {
+        --sl-color-text-accent: var(--sl-color-accent-high);
 
+        &.primary:hover {
+            background-color: var(--sl-color-accent);
+            color: var(--sl-color-black);
+            border-color: transparent;
+        }
 
-/* ---- Style details to add left rounded border ----- */
-.sl-markdown-content {
-    details {
-        position: relative;
-        border-inline-start: unset;
+        &.secondary:hover {
+            border-color: var(--sl-color-accent);
+        }
+
+        &.minimal:hover {
+            background-color: unset;
+            color: var(--sl-color-accent);
+        }
+    }
+    /* --------------------------------------------------- */
+
+    /* ----------------- Link Card Styling --------------- */
+    .sl-link-card {
+        border-radius: var(--sl-border-radius-md);
+        border: unset;
+        padding: 1rem;
+        margin: 1rem 0;
+        background-color: var(--sl-color-black);
+        box-shadow: 0 0 0 1px var(--sl-color-hairline);
     }
 
-    details::before {
-        content: '';
-        display: inline-block;
-        background: var(--sl-details-border-color);
-        width: 5px;
-        height: 100%;
-        top: 0;
-        left: 0;
-        border-radius: 140px;
-        position: absolute;
+    .sl-link-card:hover {
+        background-color: var(--sl-color-black);
+        box-shadow: 0 0 0 1px var(--sl-color-accent);
+    }
+    /* --------------------------------------------------- */
+
+    /* ------------------- ToC Styling ------------------- */
+    /* Adapted from @HiDeoo/starlight-theme-rapide */
+    .sidebar-pane summary {
+        flex-direction: row-reverse;
+        gap: 0.375rem;
+        justify-content: start;
+        padding: 0.2em var(--sl-sidebar-item-padding-inline);
+        padding-inline: calc(var(--sl-sidebar-item-padding-inline) / 2) var(--sl-sidebar-item-padding-inline);
     }
 
-    details:hover {
-        --sl-details-border-color: var(--sl-details-border-color--hover);
-    }
-}
-
-/* --------------------------------------------------- */
-
-/* --------------- Link Button Styling --------------- */
-.sl-link-button {
-    --sl-color-text-accent: var(--sl-color-accent-high);
-
-    &.primary:hover {
-        background-color: var(--sl-color-accent);
-        color: var(--sl-color-black);
-        border-color: transparent;
+    .sidebar-pane summary:is(:hover, :focus-visible),
+    .sidebar-pane summary:is(:hover, :focus-visible) .large {
+        color: var(--sl-color-accent-high);
     }
 
-    &.secondary:hover {
-        border-color: var(--sl-color-accent);
+    .sidebar-pane ul ul li {
+        margin-inline-start: calc(var(--sl-sidebar-item-padding-inline) + (0.625rem / 2));
     }
 
-    &.minimal:hover {
-        background-color: unset;
-        color: var(--sl-color-accent);
-    }
-}
-
-/* --------------------------------------------------- */
-
-
-/* --------------- Link Card Styling --------------- */
-.sl-link-card {
-    border-radius: var(--sl-border-radius-md);
-    border: unset;
-    padding: 1rem;
-    margin: 1rem 0;
-    background-color: var(--sl-color-black);
-    box-shadow: 0 0 0 1px var(--sl-color-hairline);
-}
-
-.sl-link-card:hover {
-    background-color: var(--sl-color-black);
-    box-shadow: 0 0 0 1px var(--sl-color-accent);
-}
-
-/* --------------------------------------------------- */
-
-/* ------------------- ToC Styling ------------------- */
-
-/* Adapted from @HiDeoo/starlight-theme-rapide */
-.sidebar-pane summary {
-    flex-direction: row-reverse;
-    gap: 0.375rem;
-    justify-content: start;
-    padding: 0.2em var(--sl-sidebar-item-padding-inline);
-    padding-inline: calc(var(--sl-sidebar-item-padding-inline) / 2) var(--sl-sidebar-item-padding-inline);
-}
-
-.sidebar-pane summary:is(:hover, :focus-visible),
-.sidebar-pane summary:is(:hover, :focus-visible) .large {
-    color: var(--sl-color-accent-high);
-}
-
-.sidebar-pane ul ul li {
-    margin-inline-start: calc(var(--sl-sidebar-item-padding-inline) + (0.625rem / 2));
-}
-
-.sidebar-pane a[aria-current='page'] {
-    background-color: initial;
-    color: var(--sl-color-text-accent);
-}
-
-.sidebar-pane ul ul li:has(> a[aria-current='page']) {
-    border-inline-start-color: var(--sl-color-accent-high);
-}
-
-.sidebar-pane ul ul li:has(> a:not([aria-current='page']):is(:hover, :focus-visible)) {
-    border-inline-start-color: var(--sl-color-gray-2);
-}
-
-/* --------------------------------------------------- */
-
-
-/* Ensure that graph inside sidebar matches width of container */
-@media (min-width: 72em) {
-    .right-sidebar .graph-component {
-        width: unset;
-        max-width: var(--slsg-graph-width);
-    }
-}
-
-/* ----------------------------------------------------------- */
-
-/* ------------------ Scrollbar Styling ---------------------- */
-.sidebar-pane {
-    scrollbar-width: thin;
-}
-
-body {
-    scrollbar-color: var(--sl-color-hairline) transparent;
-    scrollbar-gutter: stable;
-
-    &::-webkit-scrollbar {
-        width: 12px;
+    .sidebar-pane a[aria-current='page'] {
+        background-color: initial;
+        color: var(--sl-color-text-accent);
     }
 
-    &::-webkit-scrollbar-track {
-        background: transparent;
+    .sidebar-pane ul ul li:has(> a[aria-current='page']) {
+        border-inline-start-color: var(--sl-color-accent-high);
     }
+
+    .sidebar-pane ul ul li:has(> a:not([aria-current='page']):is(:hover, :focus-visible)) {
+        border-inline-start-color: var(--sl-color-gray-2);
+    }
+
+    .sidebar-pane ul summary:is(:hover, :focus-visible) + ul > li {
+        border-inline-start-color: var(--sl-color-gray-2);
+    }
+    /* --------------------------------------------------- */
+
+    /* Ensure that graph inside sidebar matches width of container */
+    @media (min-width: 72em) {
+        .right-sidebar .graph-component {
+            width: unset;
+            max-width: var(--slsg-graph-width);
+        }
+    }
+
+    /* ----------------------------------------------------------- */
+
+    /* ------------------ Scrollbar Styling ---------------------- */
+    .sidebar-pane {
+        scrollbar-width: thin;
+    }
+
+    body {
+        scrollbar-color: var(--sl-color-hairline) transparent;
+        scrollbar-gutter: stable;
+
+        &::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+    }
+    /* ----------------------------------------------------------- */
+
+    /* ------------------ Pagination override -------------------- */
+    /* Adapted from @HiDeoo/starlight-theme-rapide */
+    .pagination-links {
+        display: flex;
+        column-gap: unset;
+        row-gap: unset;
+    }
+
+    .pagination-links a {
+        border: unset;
+        box-shadow: unset;
+        padding: 0;
+        align-items: unset;
+        column-gap: unset;
+        display: block;
+    }
+
+    .pagination-links a[rel='next'] {
+        margin-left: auto;
+        text-align: end;
+    }
+
+    .pagination-links a[rel='next'] div {
+        justify-content: flex-end;
+    }
+
+    .pagination-links a div {
+        align-items: center;
+        column-gap: 0.15rem;
+        row-gap: 0.15rem;
+        color: var(--sl-color-gray-3);
+        display: flex;
+        line-height: 24.5px;
+        font-size: var(--sl-text-sm);
+    }
+
+    .pagination-links a p {
+        font-size: var(--sl-text-md);
+        font-weight: 600;
+        margin: 4px;
+        color: var(--sl-color-gray-2);
+    }
+
+    .pagination-links a:is(:hover, :focus-visible) div {
+        color: var(--sl-color-gray-2);
+    }
+
+    .pagination-links a:is(:hover, :focus-visible) p {
+        color: var(--sl-color-white);
+    }
+
+    /* ----------------------------------------------------------- */
 }
-/* ----------------------------------------------------------- */

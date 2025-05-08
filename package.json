@@ -37,7 +37,7 @@
 		"release-major": "bun run scripts/bump-version.ts major"
 	},
 	"dependencies": {
-		"@types/node": "^22.13.11",
+		"@types/node": "^22.15.3",
 		"prettier": "^3.5.3"
 	}
 }

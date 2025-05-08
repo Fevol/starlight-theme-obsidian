@@ -10,10 +10,10 @@ export default defineConfig({
         starlight({
             title: 'Starlight Obsidian Theme',
             credits: true,
-            social: {
-                discord: 'https://discord.com/users/264169866511122432',
-                github: 'https://github.com/fevol/starlight-theme-obsidian'
-            },
+            social: [
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/fevol/starlight-theme-obsidian'},
+				{ icon: 'discord', label: 'Discord', href: 'https://discord.com/users/264169866511122432' },
+            ],
             editLink: {
                 baseUrl: 'https://github.com/fevol/starlight-theme-obsidian/edit/main/docs/',
             },

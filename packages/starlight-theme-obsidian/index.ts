@@ -39,6 +39,9 @@ export default function plugin(userConfig?: StarlightThemeObsidianConfig): Starl
 					await starlightPlugin.hooks['config:setup']?.(args);
 				}
 				const customCss: typeof config.customCss = [
+					'starlight-theme-obsidian/styles/layers.css',
+					'starlight-theme-obsidian/styles/theme.css',
+					'starlight-theme-obsidian/styles/centered-reading.css',
 					'starlight-theme-obsidian/styles/common.css',
 					'starlight-site-graph/styles/common.css',
 				];
@@ -74,4 +77,3 @@ export default function plugin(userConfig?: StarlightThemeObsidianConfig): Starl
 		},
 	};
 }
-
