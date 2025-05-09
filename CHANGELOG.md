@@ -1,3 +1,9 @@
+## [0.3.1](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.3.1) (2025/05/09)
+### Fixes
+-   Properly add `sitegraph` as a layer to the CSS cascade, so that this theme can override its variables
+-   Made the package version constraint less stringent, making `npm` less likely to throw a peer dependency error
+    when installing the package.
+
 ## [0.3.0](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.3.0) (2025/05/09)
 ### Upgrades
 -   The minimum supported version of Starlight is now `0.33.0` due to a change in the social link syntax and support for CSS cascade layers.

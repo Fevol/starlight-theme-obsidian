@@ -10,7 +10,7 @@
     },
     "docs": {
       "name": "docs",
-      "version": "0.2.2",
+      "version": "0.3.0",
       "dependencies": {
         "@astrojs/check": "^0.9.4",
         "@astrojs/starlight": "^0.34.2",
@@ -24,11 +24,11 @@
     },
     "packages/starlight-theme-obsidian": {
       "name": "starlight-theme-obsidian",
-      "version": "0.2.2",
+      "version": "0.3.0",
       "peerDependencies": {
-        "@astrojs/starlight": "^0.33.0",
-        "astro": "^5.5.3",
-        "starlight-site-graph": "^0.3.1",
+        "@astrojs/starlight": ">=0.33.0",
+        "astro": ">=5.5.0",
+        "starlight-site-graph": "^0.3.2",
       },
     },
   },
