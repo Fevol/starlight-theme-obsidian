@@ -75,7 +75,7 @@
             Anyways, good luck to future me when you eventually get around to fixing this issue, xxx
             EDIT (2025/05/08): This issue only exists in Firefox, Chrome seems to work fine.
         */
-        body:has(.background-blur) {
+        body[data-background-blur='true'] {
             .right-sidebar-container {
                 --right-sidebar-width: clamp(var(--sl-sidebar-width) / 2, calc(100vw - var(--sl-content-width) - var(--sl-sidebar-width)), var(--sl-sidebar-width));
                 background-color: var(--sl-color-bg-sidebar);
