@@ -337,12 +337,16 @@
     }
     /* --------------------------------------------------- */
 
-    /* Ensure that graph inside sidebar matches width of container */
+    /* ---------------- Graph Styling -------------------- */
     @media (min-width: 72em) {
         .right-sidebar .graph-component {
             width: unset;
             max-width: var(--slsg-graph-width);
         }
+    }
+
+    .graph-container {
+        width: 100%;
     }
 
     /* ----------------------------------------------------------- */
