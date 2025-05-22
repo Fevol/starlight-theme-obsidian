@@ -14,18 +14,6 @@ export default function plugin(userConfig?: StarlightThemeObsidianConfig): Starl
 			},
 			'config:setup': async args => {
 				const { config, logger, updateConfig } = args;
-				// TODO: Temporary implementation of graph/backlinks exclusion from theme
-				//       Eventually, starlight-site-graph should be an optional dependency
-				if (!parsedConfig.graph) {
-					parsedConfig.graphConfig.visibilityRules = [];
-				}
-				if (!parsedConfig.backlinks) {
-					parsedConfig.backlinksConfig.visibilityRules = [];
-				}
-				if (!(parsedConfig.graph || parsedConfig.backlinks)) {
-					// This bypasses the sitemap generation, so page contents don't have to be parsed
-					parsedConfig.sitemapConfig.pageInclusionRules = [];
-				}
 
 				// TODO: This is a temporary bodge until `addPlugin` PR is created
 				if (config.plugins?.some(plugin => plugin.name === 'starlight-site-graph')) {
