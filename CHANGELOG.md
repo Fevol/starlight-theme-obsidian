@@ -1,3 +1,7 @@
+## [0.3.2](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.3.2) (2025/05/22)
+### Upgrades
+-   Bumps the minimum supported version for `starlight-site-graph` to `0.3.2`, due to internal refactoring.
+
 ## [0.3.1](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.3.1) (2025/05/09)
 ### Fixes
 -   Properly add `sitegraph` as a layer to the CSS cascade, so that this theme can override its variables
