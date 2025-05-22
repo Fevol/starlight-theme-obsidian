@@ -5,7 +5,9 @@ sidebar:
   order: 1
 ---
 
-import { Steps } from '@astrojs/starlight/components'
+import Sidebar from "starlight-theme-obsidian/overrides/Sidebar.astro?raw";
+
+import { Code, Steps } from '@astrojs/starlight/components'
 
 The `<Sidebar>` component is an override of [Starlight](https://starlight.astro.build)'s
 [`<Sidebar>`](https://starlight.astro.build/reference/overrides/#sidebar), and has been
@@ -23,30 +25,7 @@ If you want to extend the `<Sidebar>` component for your own website, you can do
 
 <Steps>
 	1. Create your own `Sidebar.astro` component in the `src/overrides` directory (or `src/components` if you prefer).
-		```astro
-		---
-		import Default from '@astrojs/starlight/components/Sidebar.astro';
-		import Search from 'virtual:starlight/components/Search';
-		import SiteTitle from 'virtual:starlight/components/SiteTitle';
-		import MobileMenuFooter from 'virtual:starlight/components/MobileMenuFooter';
-
-		import config from 'virtual:starlight/user-config';
-
-		const shouldRenderSearch = config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
-		---
-
-		<div class="sidebar-top">
-			<div class="title-wrapper ">
-				<SiteTitle/>
-			</div>
-
-			{shouldRenderSearch && <Search/>}
-
-			<MobileMenuFooter/>
-		</div>
-
-		<Default><slot /></Default>
-		```
+        <Code code={Sidebar} lang="astro" title="src/overrides/Sidebar.astro" />
 	2. Add the `Sidebar` override to your `astro.config.mjs` file.
 		```diff lang="js"
 		// astro.config.mjs
