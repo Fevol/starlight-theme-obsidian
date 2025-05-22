@@ -52,6 +52,7 @@ for (const file of package_files) {
 }
 
 try {
+	spawnSync('bun', ['install', '--frozen-lockfile', '--lockfile-only']);
 	spawnSync('git', ['commit', '-m', `chore(release): ${newVersion}`]);
 	spawnSync('git', ['tag', '-a', newVersion, '-m', `chore(release): ${newVersion}`]);
 	console.log(`Package has been successfully bumped | ${currentVersion} -> ${newVersion} [${versionType}]`);
