@@ -5,7 +5,7 @@ import { PageGraph, PageBacklinks } from "starlight-site-graph/components";
 ---
 
 {/* (STARLIGHT-THEME-OBSIDIAN): Add page graph and backlink components */}
-<PageGraph class="right-sidebar-panel graph-panel">
+<PageGraph class="right-sidebar-panel slsg-graph-panel">
     <h2 slot="title">{Astro.locals.t('starlight-site-graph.graph')}</h2>
 </PageGraph>
 
@@ -22,7 +22,7 @@ import { PageGraph, PageBacklinks } from "starlight-site-graph/components";
     )
 }
 
-<PageBacklinks class="right-sidebar-panel backlinks-panel">
+<PageBacklinks class="right-sidebar-panel slsg-backlinks-panel">
     <h2 slot="title">{Astro.locals.t('starlight-site-graph.backlinks')}</h2>
 </PageBacklinks>
 

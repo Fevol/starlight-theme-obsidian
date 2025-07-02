@@ -339,13 +339,13 @@
 
     /* ---------------- Graph Styling -------------------- */
     @media (min-width: 72em) {
-        .right-sidebar .graph-component {
+        .right-sidebar .slsg-graph-component {
             width: unset;
             max-width: var(--slsg-graph-width);
         }
     }
 
-    .graph-container {
+    .slsg-graph-container {
         width: 100%;
     }
 
