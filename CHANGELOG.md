@@ -1,3 +1,7 @@
+## [0.4.1](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.4.1) (2025/08/31)
+### Changes
+-   Bumps the minimum supported version for `starlight-site-graph` to `0.5.0`, due to style changes.
+
 ## [0.4.0](https://github.com/Fevol/starlight-theme-obsidian/releases/tag/0.4.0) (2025/07/02)
 ### Changes
 -   ⚠️ **Breaking change:** All classes provided by `starlight-site-graph` are now prefixed with `slsg-` to avoid conflicts with other packages.
