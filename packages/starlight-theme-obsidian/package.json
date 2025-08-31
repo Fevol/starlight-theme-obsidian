@@ -1,7 +1,7 @@
 {
 	"name": "starlight-theme-obsidian",
 	"author": "Fevol",
-	"version": "0.4.0",
+	"version": "0.4.1",
 	"license": "MIT",
 	"description": "A Starlight theme inspired by the Obsidian Publish website theme",
 	"type": "module",
@@ -41,7 +41,7 @@
 		"astro": ">=5.5.0",
 		"starlight-site-graph": "^0.5.0"
 	},
-    "overrides": {
-        "picomatch": "^4.0.3"
-    }
+	"overrides": {
+		"picomatch": "^4.0.3"
+	}
 }
