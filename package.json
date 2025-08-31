@@ -39,5 +39,8 @@
 	"dependencies": {
 		"@types/node": "^22.15.3",
 		"prettier": "^3.5.3"
-	}
+	},
+    "overrides": {
+        "picomatch": "^4.0.3"
+    }
 }

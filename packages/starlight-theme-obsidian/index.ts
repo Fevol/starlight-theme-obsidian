@@ -32,6 +32,7 @@ export default function plugin(userConfig?: StarlightThemeObsidianConfig): Starl
 					'starlight-theme-obsidian/styles/centered-reading.css',
 					'starlight-theme-obsidian/styles/common.css',
 					'starlight-site-graph/styles/common.css',
+					'starlight-site-graph/styles/starlight.css',
 				];
 
 				const componentOverrides: typeof config.components = {};

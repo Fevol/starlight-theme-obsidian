@@ -2,6 +2,7 @@
     :root {
         --sl-color-bg-nav: var(--sl-color-bg);
         --sl-color-bg-sidebar: var(--sl-color-bg);
+        --slsg-graph-minimized-bg-color: var(--sl-color-black);
 
         --sl-border-radius-sm: 4px;
         --sl-border-radius-md: 8px;
@@ -14,6 +15,5 @@
 
     :root[data-theme='light'] {
         --sl-color-bg: #f8f9fa;
-        --slsg-graph-bg-color: var(--sl-color-black);
     }
 }
