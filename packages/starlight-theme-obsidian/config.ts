@@ -1,9 +1,15 @@
 import { AstroError } from 'astro/errors';
 import { z } from 'astro/zod';
 
-import { starlightSiteGraphConfigSchema } from 'starlight-site-graph/config';
+export const starlightThemeObsidianConfigSchema = z.object({
 
-export const starlightThemeObsidianConfigSchema = starlightSiteGraphConfigSchema.removeDefault().extend({
+	/**
+	 * Whether to suppress warnings about overrides
+	 * @default true
+	 * @remarks If false, the plugin will not warn you if a plugin is overriding the theme's overrides or if you have local overrides for components that the theme is trying to override.
+	 */
+	overrideWarnings: z.boolean().optional().default(true),
+
 
 }).default({});
 

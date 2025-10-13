@@ -1,0 +1,18 @@
+@layer obsidian {
+
+    :root {
+        --slsg-graph-minimized-bg-color: var(--sl-color-black);
+    }
+
+    @media (min-width: 72em) {
+        .right-sidebar .slsg-graph-component {
+            width: unset;
+            max-width: var(--slsg-graph-width);
+        }
+    }
+
+    .slsg-graph-container {
+        width: 100%;
+    }
+
+}

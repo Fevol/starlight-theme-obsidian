@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import starlightObsidianTheme from 'starlight-theme-obsidian';
+import starlightSiteGraph from 'starlight-site-graph';
+import starlightThemeObsidian from 'starlight-theme-obsidian';
 import starlightLinksValidator from 'starlight-links-validator';
 
 export default defineConfig({
@@ -24,7 +25,8 @@ export default defineConfig({
                 starlightLinksValidator({
                     errorOnInvalidHashes: false
                 }),
-                starlightObsidianTheme(),
+                starlightSiteGraph(),
+				starlightThemeObsidian({ overrideWarnings: true }),
             ],
             favicon: './favicon.svg',
             sidebar: [

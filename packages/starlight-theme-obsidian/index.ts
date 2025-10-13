@@ -1,9 +1,8 @@
 import type { StarlightPlugin } from '@astrojs/starlight/types';
-import starlightSiteGraph from 'starlight-site-graph';
 import { type StarlightThemeObsidianConfig, validateConfig } from 'starlight-theme-obsidian/config';
 
 export default function plugin(userConfig?: StarlightThemeObsidianConfig): StarlightPlugin {
-	const parsedConfig = validateConfig(userConfig);
+	const settings = validateConfig(userConfig);
 
 	let i18nArgs = null;
 	return {
@@ -15,50 +14,89 @@ export default function plugin(userConfig?: StarlightThemeObsidianConfig): Starl
 			'config:setup': async args => {
 				const { config, logger, updateConfig } = args;
 
-				// TODO: This is a temporary bodge until `addPlugin` PR is created
-				if (config.plugins?.some(plugin => plugin.name === 'starlight-site-graph')) {
-					logger.warn(
-						'`starlight-site-graph` is already included in the `astro.config.mjs`. Skipping integration.',
-					);
-				} else {
-					// TODO: This is dumb, bad, and I should really start work on that `addPlugin` PR...
-					const starlightPlugin = starlightSiteGraph(parsedConfig);
-					await starlightPlugin.hooks['i18n:setup']?.(i18nArgs);
-					await starlightPlugin.hooks['config:setup']?.(args);
-				}
 				const customCss: typeof config.customCss = [
 					'starlight-theme-obsidian/styles/layers.css',
 					'starlight-theme-obsidian/styles/theme.css',
 					'starlight-theme-obsidian/styles/centered-reading.css',
-					'starlight-theme-obsidian/styles/common.css',
-					'starlight-site-graph/styles/common.css',
-					'starlight-site-graph/styles/starlight.css',
+					'starlight-theme-obsidian/styles/common.css'
 				];
 
 				const componentOverrides: typeof config.components = {};
 
-				type OverridableComponent = 'Sidebar' | 'PageFrame' | 'Pagination' | 'ThemeSelect' | 'PageSidebar';
-				const overridableComponents: OverridableComponent[] = [
-					'Sidebar',
-					'PageFrame',
-					'Pagination',
-					'ThemeSelect',
-					'PageSidebar',
-				];
-				for (const component of overridableComponents) {
-					if (config.components?.[component]) {
-						logger.warn(
-							`It looks like you already have a \`${component}\` component override in your Starlight configuration.`,
-						);
-					} else {
-						componentOverrides[component] = `starlight-theme-obsidian/overrides/${component}.astro`;
+				type StarlightComponent = "Sidebar" | "PageFrame" | "Pagination" | "ThemeSelect" | "PageSidebar";
+				const overridableComponents: Record<StarlightComponent, string> = {
+					'Sidebar': 'Sidebar',
+					'PageFrame': 'PageFrame',
+					'Pagination': 'Pagination',
+					'ThemeSelect': 'ThemeSelect',
+					'PageSidebar': 'PageSidebar',
+				};
+
+				if (settings.overrideWarnings) {
+					const pluginsAfterTheme =
+						config.plugins?.slice(
+							config.plugins.findIndex(p => p.name === 'starlight-theme-obsidian') + 1,
+						) ?? [];
+					for (const plugin of pluginsAfterTheme) {
+						const pluginConfigSetup = plugin['hooks']?.['config:setup'];
+						if (pluginConfigSetup) {
+							const functionBody = pluginConfigSetup.toString();
+							const includedIdentifiers = Object.keys(overridableComponents).filter(identifier =>
+								functionBody.includes(identifier),
+							);
+
+							if (includedIdentifiers.length !== 0) {
+								const allIdentifiers = includedIdentifiers.join('`, `');
+								logger.warn(
+									`The plugin \`${plugin.name}\` appears to override the following components in its \`config:setup\` hook: \`${allIdentifiers}\`.`,
+								);
+								logger.warn(
+									`\tSince this plugin is listed after \`starlight-theme-obsidian\`, it will take precedence over the theme's built-in support for these plugins.`,
+								);
+								logger.warn(
+									`\tPlease move the \`starlight-theme-obsidian\` plugin to the end of your plugins list in your Starlight configuration to ensure compatibility.`,
+								);
+								logger.warn(
+									`\tSuppress this warning by setting the \`overrideWarnings\` option to \`false\` in your Starlight configuration.`,
+								);
+							}
+						}
 					}
+				}
+
+				if (config.plugins?.some(plugin => plugin.name === 'starlight-site-graph-plugin')) {
+					logger.info('Detected `starlight-site-graph` plugin, applying compatibility settings...');
+					overridableComponents.PageSidebar += `-slsg`;
+					customCss.push('starlight-theme-obsidian/styles/extensions/starlight-site-graph.css');
+				}
+
+				for (const identifier of Object.keys(overridableComponents) as StarlightComponent[]) {
+					const other_usage = config.components?.[identifier];
+					if (settings.overrideWarnings && other_usage) {
+						if (!other_usage.startsWith('starlight-site-graph/')) {
+							const isLocal = other_usage.startsWith('./') || other_usage.startsWith('../') || other_usage.startsWith('/');
+							if (isLocal) {
+								logger.warn(`A local override for the \`${identifier}\` component was detected at \`${other_usage}\`.`)
+								logger.warn(`\t\`starlight-theme-obsidian\` will skip overriding this component to avoid conflicts.`)
+								logger.warn(`\tIf you are trying to support another plugin, please consider opening an issue on this theme's repository to have it supported by default.`)
+								logger.warn(`\tSuppress this warning by setting the \`overrideWarnings\` option to \`false\` in your Starlight configuration.`)
+							} else {
+								logger.warn(`A \`${identifier}\` component override was defined for a plugin that this theme does not have built-in support for: \`${other_usage}\`.`)
+								logger.warn(`\t\`starlight-theme-obsidian\` will skip overriding this component to avoid conflicts.`)
+								logger.warn(`\tIf you are trying to use another plugin with this theme, please consider opening an issue on this theme's repository to have it supported by default.`)
+								logger.warn(`\tSuppress this warning by setting the \`overrideWarnings\` option to \`false\` in your Starlight configuration.`)
+							}
+							continue;
+						}
+					}
+
+					componentOverrides[identifier] = `starlight-theme-obsidian/overrides/${overridableComponents[identifier]}.astro`;
 				}
 
 				updateConfig({
 					components: {
-						...componentOverrides,
 						...config.components,
+						...componentOverrides,
 					},
 					customCss: [...customCss, ...(config.customCss ?? [])],
 				});
