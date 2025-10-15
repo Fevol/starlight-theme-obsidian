@@ -302,6 +302,10 @@
 
     /* ------------------- ToC Styling ------------------- */
     /* Adapted from @HiDeoo/starlight-theme-rapide */
+    .sidebar-pane .top-level li:is(:hover, :focus-visible) .large {
+        color: var(--sl-color-accent-high);
+    }
+
     .sidebar-pane summary {
         flex-direction: row-reverse;
         gap: 0.375rem;

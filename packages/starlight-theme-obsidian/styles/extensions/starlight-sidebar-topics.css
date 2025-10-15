@@ -1,0 +1,24 @@
+.starlight-sidebar-topics::after {
+    border-top: unset;
+    margin-top: unset;
+}
+
+@layer obsidian {
+
+    /* EXPL: Important's are required, since base topics styles are unlayered */
+    ul.starlight-sidebar-topics {
+        /* I chose not to add any padding or borders, as this clashes with the rest of the theme */
+        /* TODO: check whether this can be made less cramped/less out of place */
+    }
+
+    .starlight-sidebar-topics :is(:hover, :focus-visible) {
+        background-color: var(--sl-color-gray-6);
+        border-radius: 0.25rem;
+    }
+
+    .starlight-sidebar-topics a:is(:hover, :focus-visible, .starlight-sidebar-topics-current) svg {
+        fill: var(--sl-color-bg);
+    }
+
+
+}

@@ -70,6 +70,12 @@ export default function plugin(userConfig?: StarlightThemeObsidianConfig): Starl
 					customCss.push('starlight-theme-obsidian/styles/extensions/starlight-site-graph.css');
 				}
 
+				if (config.plugins?.some(plugin => plugin.name === 'starlight-sidebar-topics')) {
+					logger.info('Detected `starlight-sidebar-topics` plugin, applying compatibility settings...');
+					overridableComponents.Sidebar += `-ssbt`;
+					customCss.push('starlight-theme-obsidian/styles/extensions/starlight-sidebar-topics.css');
+				}
+
 				for (const identifier of Object.keys(overridableComponents) as StarlightComponent[]) {
 					const other_usage = config.components?.[identifier];
 					if (settings.overrideWarnings && other_usage) {
